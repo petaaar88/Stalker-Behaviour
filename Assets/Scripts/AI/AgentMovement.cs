@@ -29,45 +29,44 @@ public class AgentMovement : MonoBehaviour
     {
         // Setting new base offset
         if (previousBaseOffset != baseOffset)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y + baseOffset - previousBaseOffset, transform.position.z);
-
-            if (nodesPositions != null)
-                for (int i = 0; i < nodesPositions.Count; i++)
-                {
-                    float offsetDelta = baseOffset - previousBaseOffset;
-                    Vector3 pos = nodesPositions[i];
-                    pos.y += offsetDelta;
-                    nodesPositions[i] = pos;
-                }
-
-            previousBaseOffset = baseOffset;
-        }
+            SetNewBaseOffset();
 
         // Settting new path
         if (previousPath != pathSolver.path)
-        {
-            previousPath = pathSolver.path;
-            currentNodeIndex = 0;
-            nodesPositions.Clear();
-
-            foreach (Node n in pathSolver.path)
-            {
-                // Adding base offset to nodes in path
-                Vector3 position = n.worldPosition;
-                position.y += baseOffset;
-                nodesPositions.Add(position);
-            }
-        }
-
-        
- 
+            SetNewPath();
 
 
         if (Vector3.Distance(transform.position, target.position) <= stoppingDistance)
             return;
 
+
         // Move agent
+        Vector3 direction = target.position - transform.position;
+        float distance = direction.magnitude;
+
+        if (Physics.Raycast(transform.position, direction.normalized, out RaycastHit hit, distance, pathSolver.grid.unwalkableMask))
+        {
+            pathSolver.canFindPath = true;
+            UsePathfinding();
+        }
+        else
+        {
+            pathSolver.canFindPath = false;
+            if (pathSolver.path != null)
+            {
+                previousPath.Clear();
+                nodesPositions.Clear();
+                pathSolver.path.Clear();
+                currentNodeIndex = 0;
+            }
+            GoStraightToTarget(direction);
+        }
+
+    }
+
+    private void UsePathfinding()
+    {
+
         if (nodesPositions != null)
             if (nodesPositions.Count != currentNodeIndex)
             {
@@ -75,13 +74,11 @@ public class AgentMovement : MonoBehaviour
 
                 Vector3 direction = nodesPositions[currentNodeIndex] - transform.position;
 
-                // Ako postoji neka razdaljina
+                // Rotate towards next waypoint
                 if (direction != Vector3.zero)
                 {
-                    // Izračunaj željeni ugao
                     Quaternion targetRotation = Quaternion.LookRotation(direction);
 
-                    // Postepeno rotiraj ka cilju
                     Quaternion smoothRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
                     transform.rotation = Quaternion.Euler(0, smoothRotation.eulerAngles.y, 0);
                 }
@@ -90,9 +87,58 @@ public class AgentMovement : MonoBehaviour
                 if (transform.position == nodesPositions[currentNodeIndex])
                     currentNodeIndex++;
             }
+    }
+
+    private void GoStraightToTarget(Vector3 direction)
+    {
+        Vector3 targetPosition = target.position;
+        targetPosition.y = transform.position.y;
+
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+
+        // Rotate towards player
+        if (direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+            Quaternion smoothRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Euler(0, smoothRotation.eulerAngles.y, 0);
+        }
+    }
+
+    private void SetNewBaseOffset()
+    {
+
+        transform.position = new Vector3(transform.position.x, transform.position.y + baseOffset - previousBaseOffset, transform.position.z);
+
+        if (nodesPositions != null)
+            for (int i = 0; i < nodesPositions.Count; i++)
+            {
+                float offsetDelta = baseOffset - previousBaseOffset;
+                Vector3 pos = nodesPositions[i];
+                pos.y += offsetDelta;
+                nodesPositions[i] = pos;
+            }
+
+        previousBaseOffset = baseOffset;
 
     }
 
+    private void SetNewPath()
+    {
+        previousPath = pathSolver.path;
+        currentNodeIndex = 0;
+        nodesPositions.Clear();
+
+        foreach (Node n in pathSolver.path)
+        {
+            // Adding base offset to nodes in path
+            Vector3 position = n.worldPosition;
+            position.y += baseOffset;
+            nodesPositions.Add(position);
+        }
+    }
+
     public void SetTarget(Transform target) { this.target = target; pathSolver.SetTarget(target); }
-    
+
 }

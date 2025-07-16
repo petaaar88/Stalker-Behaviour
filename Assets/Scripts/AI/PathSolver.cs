@@ -5,12 +5,13 @@ using UnityEngine;
 public class PathSolver : MonoBehaviour
 {
    
-    private Grid grid;
+    public Grid grid;
     private Transform seeker, target;
     private Vector3 previousTargetPosition;
     private int pathId;
     public List<Node> path;
-
+    public bool canFindPath;
+  
     void Awake()
     {
         grid = FindObjectOfType<Grid>();
@@ -20,7 +21,7 @@ public class PathSolver : MonoBehaviour
 
     void Update()
     {
-        if(seeker != null & target != null && grid.NodeFromWorldPoint(target.position) != grid.NodeFromWorldPoint(previousTargetPosition))
+        if(seeker != null & target != null && grid.NodeFromWorldPoint(target.position) != grid.NodeFromWorldPoint(previousTargetPosition) && canFindPath)
         {
             previousTargetPosition = target.position;
             FindPath(seeker.position, target.position);
