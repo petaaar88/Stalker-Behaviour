@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PathSolver : MonoBehaviour
 {
-   
+    [HideInInspector]
     public Grid grid;
     private Transform seeker, target;
     private Vector3 previousTargetPosition;
     private int pathId;
     public List<Node> path;
+    [HideInInspector]
     public bool canFindPath;
   
     void Awake()

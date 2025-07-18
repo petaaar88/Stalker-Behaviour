@@ -6,27 +6,35 @@ using UnityEngine;
 public class AgentMovement : MonoBehaviour
 {
     private PathSolver pathSolver;
-    public Transform target;
+    private Transform target;
     private List<Node> previousPath = null;
     private List<Vector3> nodesPositions = new List<Vector3>();
+    private int currentNodeIndex = 0;
+
+
     public float speed = 2.0f;
     public float baseOffset = 0.0f;
     private float previousBaseOffset = 0.0f;
     public float stoppingDistance = 0.0f;
     public float rotationSpeed = 1.0f;
 
-    private int currentNodeIndex = 0;
+    private void Awake()
+    {
+        pathSolver = GetComponent<PathSolver>();
+        
+    }
 
     void Start()
     {
-        pathSolver = GetComponent<PathSolver>();
         pathSolver.SetSeeker(transform);
-        pathSolver.SetTarget(target);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (target == null)
+            return;
+
         // Setting new base offset
         if (previousBaseOffset != baseOffset)
             SetNewBaseOffset();
@@ -139,6 +147,6 @@ public class AgentMovement : MonoBehaviour
         }
     }
 
-    public void SetTarget(Transform target) { this.target = target; pathSolver.SetTarget(target); }
+    public void SetTarget(Transform target) { this.target = target; pathSolver.canFindPath = true; pathSolver.SetTarget(target); }
 
 }
