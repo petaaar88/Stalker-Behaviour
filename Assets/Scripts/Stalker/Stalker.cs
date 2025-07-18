@@ -11,7 +11,13 @@ public class Stalker : MonoBehaviour
     public string currentStalkerState;
 
     public StateMachine<Stalker> stateMachine;
+    [HideInInspector]
     public Transform player;
+    public Transform eyes;
+    [HideInInspector]
+    public PlayerStates playerStates;
+    public GameObject playerGameObject;
+    public Transform playerSpotPoint;
 
     [Header("Cover Settings")]
     public List<Transform> coversPositions;
@@ -35,10 +41,15 @@ public class Stalker : MonoBehaviour
     public float chaseDelay = 1.0f;
     public float chaseSpeed = 5.35f;
 
-    [Header("Sound Detection")]
-    public float loudSoundDetectionRange;
-    public float subtlesoundDetecitonRange;
-    public bool showSoundDetectionRange;
+    [Header("Noice Detection")]
+    public float loudNoiceDetectionRange;
+    public float subtleNoiceDetecitonRange;
+    public bool showNoiceDetectionRange;
+
+    [Header("Investigating")]
+    public float investigatingSpeed = 3.0f;
+    [HideInInspector]
+    public Transform noice;
 
     // States
     public Relocating relocatingState;
@@ -46,18 +57,26 @@ public class Stalker : MonoBehaviour
     public Chase chaseState;
     public Recovering recoveringState;
     public Investigating investigatingState;
+    public LookingAround lookingAroundState;
+    public AlertInvestigating alertInvestigatingState;
     public GlobalStalkerState globalState;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         agentMovement = GetComponent<AgentMovement>();
+        player = playerGameObject.GetComponent<Transform>();
+        playerStates = playerGameObject.GetComponent<PlayerStates>();
+
+        noice = new GameObject().transform;
 
         relocatingState = new Relocating();
         inCoverState = new InCover();
         chaseState = new Chase();
         recoveringState = new Recovering();
         investigatingState = new Investigating();
+        lookingAroundState = new LookingAround();
+        alertInvestigatingState = new AlertInvestigating();
         globalState = new GlobalStalkerState();
 
         stateMachine = new StateMachine<Stalker>(this);
@@ -83,16 +102,15 @@ public class Stalker : MonoBehaviour
                 Gizmos.DrawWireSphere(coverPosition.position, 2);
         }
 
-        Vector3 eyePosition = transform.position;
-        eyePosition.y += 1.4f;
+        Vector3 eyePosition = eyes.position;
 
-        if (showSoundDetectionRange)
+        if (showNoiceDetectionRange)
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(eyePosition, loudSoundDetectionRange);
+            Gizmos.DrawWireSphere(eyePosition, loudNoiceDetectionRange);
 
             Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(eyePosition, subtlesoundDetecitonRange);
+            Gizmos.DrawWireSphere(eyePosition, subtleNoiceDetecitonRange);
 
         }
 
@@ -102,7 +120,7 @@ public class Stalker : MonoBehaviour
         if (canSeePlayer)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawRay(eyePosition, (player.position - transform.position).normalized * 5);
+            Gizmos.DrawRay(eyePosition, playerSpotPoint.position - eyePosition);
         }
 
 
@@ -118,5 +136,11 @@ public class Stalker : MonoBehaviour
         Gizmos.DrawLine(eyePosition, eyePosition + rightDirection * viewDistance);
         Gizmos.DrawLine(eyePosition, eyePosition + leftDirection * viewDistance);
 
+    }
+
+    public void EndInvestigation()
+    {
+        animator.SetTrigger("InvestigationEnd");
+        stateMachine.ChangeState(relocatingState);
     }
 }

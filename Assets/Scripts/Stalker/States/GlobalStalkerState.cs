@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class GlobalStalkerState : State<Stalker>
@@ -17,7 +18,7 @@ public class GlobalStalkerState : State<Stalker>
         // Delaying chasing
         if (sawPlayer)
         {
-            if(stalker.stateMachine.GetCurrentState() == stalker.recoveringState)
+            if (stalker.stateMachine.GetCurrentState() == stalker.recoveringState)
             {
                 sawPlayer = false;
                 chaseDelayTimer = 0;
@@ -31,7 +32,7 @@ public class GlobalStalkerState : State<Stalker>
                 chaseDelayTimer = 0.0f;
                 sawPlayer = false;
                 stalker.stateMachine.ChangeState(stalker.chaseState);
-                
+
             }
         }
 
@@ -39,31 +40,49 @@ public class GlobalStalkerState : State<Stalker>
         if (!stalker.canChasePlayer)
             return;
 
-        
 
-        Vector3 directionToPlayer = stalker.player.position - stalker.transform.position;
 
+
+        Vector3 directionToPlayer = stalker.playerSpotPoint.position - stalker.eyes.position;
+
+        // Visibility 
         if (directionToPlayer.magnitude <= stalker.viewDistance)
         {
-            float angle = Vector3.Angle(stalker.transform.forward, directionToPlayer.normalized);
+            float angle = Vector3.Angle(stalker.eyes.transform.forward, directionToPlayer.normalized);
 
             if (angle <= stalker.viewAngle / 2)
-            {
-                if (Physics.Raycast(stalker.transform.position, directionToPlayer.normalized, directionToPlayer.magnitude, stalker.obstacleMask))
-                {
-                    stalker.canSeePlayer = false;
-                }
-                else
-                {
-                    stalker.canSeePlayer = true;
+                if (!Physics.Raycast(stalker.eyes.transform.position, directionToPlayer.normalized, directionToPlayer.magnitude, stalker.obstacleMask))
                     sawPlayer = true;
-                }
-            }
-            else
-                stalker.canSeePlayer = false;
         }
+
+        // Allowing to show line from stalker to player
+        if (stalker.stateMachine.GetCurrentState() == stalker.chaseState)
+            stalker.canSeePlayer = true;
         else
             stalker.canSeePlayer = false;
+
+        // Subtile Noice Detectoin
+        if (Vector3.Distance(stalker.transform.position, stalker.player.position) <= stalker.subtleNoiceDetecitonRange
+            && stalker.playerStates.currentState == PlayerStates.States.WALKING
+            && stalker.stateMachine.GetCurrentState() != stalker.relocatingState
+            && stalker.stateMachine.GetCurrentState() != stalker.chaseState
+            && stalker.stateMachine.GetCurrentState() != stalker.alertInvestigatingState)
+        {
+            stalker.noice.position = stalker.player.position;
+            stalker.stateMachine.ChangeState(stalker.investigatingState);
+        }
+
+        // Loud Noice Detection
+        if (Vector3.Distance(stalker.transform.position, stalker.player.position) <= stalker.loudNoiceDetectionRange
+            && stalker.playerStates.currentState == PlayerStates.States.SPRINTING
+            && stalker.stateMachine.GetCurrentState() != stalker.relocatingState
+            && stalker.stateMachine.GetCurrentState() != stalker.chaseState
+             && stalker.stateMachine.GetCurrentState() != stalker.investigatingState) // ovde dodaj i bacanje vlase i borbu
+        {
+            stalker.noice.position = stalker.player.position; // prepravi ovo da se koriste zvukovi i za flasu i fight
+            stalker.stateMachine.ChangeState(stalker.alertInvestigatingState);
+        }
+
     }
 
     public void Exit(Stalker entity)

@@ -7,11 +7,15 @@ public class Investigating : State<Stalker>
 
     public void Enter(Stalker stalker)
     {
-
+        stalker.agentMovement.speed = stalker.investigatingSpeed;
+        stalker.agentMovement.SetTarget(stalker.noice);
+        stalker.animator.SetTrigger("HeardSubtleNoice");
+        
     }
     public void Update(Stalker stalker)
     {
-
+        if (Vector3.Distance(stalker.noice.position, stalker.transform.position) <= 2.0f)
+            stalker.stateMachine.ChangeState(stalker.lookingAroundState);
     }
     public void Exit(Stalker stalker)
     {

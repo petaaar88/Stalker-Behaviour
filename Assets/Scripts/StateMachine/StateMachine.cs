@@ -39,4 +39,5 @@ public class StateMachine<T>
     public void SetPreviousState(State<T> state) { this.previousState = state; }
 
     public State<T> GetCurrentState() { return this.currentState; }
+    public State<T> GetPreviousState() { return this.previousState; }
 }
