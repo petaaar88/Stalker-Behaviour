@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -86,8 +86,44 @@ public class Grid : MonoBehaviour
 
         int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
         int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
-        return grid[x, y];
+
+        Node node = grid[x, y];
+
+        if (node.walkable)
+            return node;
+
+        // Širimo se koncentrično dok ne pronađemo walkable čvor
+        int maxRadius = Mathf.Max(gridSizeX, gridSizeY);
+        for (int radius = 1; radius < maxRadius; radius++)
+        {
+            for (int dx = -radius; dx <= radius; dx++)
+            {
+                for (int dy = -radius; dy <= radius; dy++)
+                {
+                    // Samo ivice trenutnog kvadrata (spiralna ivica)
+                    if (Mathf.Abs(dx) != radius && Mathf.Abs(dy) != radius)
+                        continue;
+
+                    int checkX = x + dx;
+                    int checkY = y + dy;
+
+                    if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
+                    {
+                        Node neighbor = grid[checkX, checkY];
+                        if (neighbor.walkable)
+                        {
+                            return neighbor;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Ako nijedan walkable nije pronađen (što ne bi trebalo da se desi), vraćamo originalni
+        return node;
     }
+
+
 
 
     public void AddNewPath(PathSolver pathSolver) { pathSolver.SetPathId(pathsNextId++); }
