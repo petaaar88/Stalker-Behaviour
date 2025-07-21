@@ -10,7 +10,8 @@ public class Investigating : State<Stalker>
         stalker.agentMovement.speed = stalker.investigatingSpeed;
         stalker.agentMovement.SetTarget(stalker.noice);
         stalker.animator.SetTrigger("HeardSubtleNoice");
-        
+        stalker.currentStalkerState = "Investigating";
+
     }
     public void Update(Stalker stalker)
     {
@@ -19,6 +20,6 @@ public class Investigating : State<Stalker>
     }
     public void Exit(Stalker stalker)
     {
-
+        stalker.previousStalkerState = "Investigating";
     }
 }

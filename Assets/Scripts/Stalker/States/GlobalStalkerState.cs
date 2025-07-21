@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -26,7 +27,7 @@ public class GlobalStalkerState : State<Stalker>
             }
 
             chaseDelayTimer += Time.deltaTime;
-
+            
             if (chaseDelayTimer >= stalker.chaseDelay)
             {
                 chaseDelayTimer = 0.0f;
@@ -39,7 +40,6 @@ public class GlobalStalkerState : State<Stalker>
         // mora da bude ispod delaying chase
         if (!stalker.canChasePlayer)
             return;
-
 
 
 
@@ -62,26 +62,28 @@ public class GlobalStalkerState : State<Stalker>
             stalker.canSeePlayer = false;
 
         // Subtile Noice Detectoin
-        if (Vector3.Distance(stalker.transform.position, stalker.player.position) <= stalker.subtleNoiceDetecitonRange
-            && stalker.playerStates.currentState == PlayerStates.States.WALKING
+        if (stalker.previousLoudSubtlePosition != NoiceListener.Instance.subtleNoicePosition)
+            if (Vector3.Distance(stalker.transform.position, NoiceListener.Instance.subtleNoicePosition) <= stalker.subtleNoiceDetecitonRange
             && stalker.stateMachine.GetCurrentState() != stalker.relocatingState
             && stalker.stateMachine.GetCurrentState() != stalker.chaseState
             && stalker.stateMachine.GetCurrentState() != stalker.alertInvestigatingState)
-        {
-            stalker.noice.position = stalker.player.position;
-            stalker.stateMachine.ChangeState(stalker.investigatingState);
-        }
+            {
+                stalker.previousLoudSubtlePosition = stalker.noice.position;
+                stalker.noice.position = NoiceListener.Instance.subtleNoicePosition;
+                stalker.stateMachine.ChangeState(stalker.investigatingState);
+            }
 
         // Loud Noice Detection
-        if (Vector3.Distance(stalker.transform.position, stalker.player.position) <= stalker.loudNoiceDetectionRange
-            && stalker.playerStates.currentState == PlayerStates.States.SPRINTING
-            && stalker.stateMachine.GetCurrentState() != stalker.relocatingState
-            && stalker.stateMachine.GetCurrentState() != stalker.chaseState
-             && stalker.stateMachine.GetCurrentState() != stalker.investigatingState) // ovde dodaj i bacanje vlase i borbu
-        {
-            stalker.noice.position = stalker.player.position; // prepravi ovo da se koriste zvukovi i za flasu i fight
-            stalker.stateMachine.ChangeState(stalker.alertInvestigatingState);
-        }
+        if (stalker.previousLoudNoicePosition != NoiceListener.Instance.loudNoicePosition)
+            if (Vector3.Distance(stalker.transform.position, NoiceListener.Instance.loudNoicePosition) <= stalker.loudNoiceDetectionRange
+                && stalker.stateMachine.GetCurrentState() != stalker.relocatingState
+                && stalker.stateMachine.GetCurrentState() != stalker.chaseState) // ovde dodaj i bacanje vlase i borbu
+            {
+                stalker.previousLoudNoicePosition = stalker.noice.position;
+                stalker.noice.position = NoiceListener.Instance.loudNoicePosition; // prepravi ovo da se koriste zvukovi i za flasu i fight
+                stalker.stateMachine.ChangeState(stalker.alertInvestigatingState);
+
+            }
 
     }
 

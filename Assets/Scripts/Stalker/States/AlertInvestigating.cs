@@ -7,6 +7,7 @@ public class AlertInvestigating : State<Stalker>
 {
     public void Enter(Stalker stalker)
     {
+        stalker.currentStalkerState = "AlertInvestigating";
         stalker.agentMovement.speed = stalker.relocatingSpeed;
         stalker.agentMovement.SetTarget(stalker.noice);
         if (stalker.stateMachine.GetPreviousState() == stalker.lookingAroundState)
@@ -23,6 +24,6 @@ public class AlertInvestigating : State<Stalker>
 
     public void Exit(Stalker stalker)
     {
-        
+        stalker.previousStalkerState = "AlertInvestigating";
     }
 }

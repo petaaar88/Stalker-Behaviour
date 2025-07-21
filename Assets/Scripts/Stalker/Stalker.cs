@@ -9,6 +9,7 @@ public class Stalker : MonoBehaviour
     [HideInInspector]
     public Animator animator;
     public string currentStalkerState;
+    public string previousStalkerState;
 
     public StateMachine<Stalker> stateMachine;
     [HideInInspector]
@@ -45,6 +46,11 @@ public class Stalker : MonoBehaviour
     public float loudNoiceDetectionRange;
     public float subtleNoiceDetecitonRange;
     public bool showNoiceDetectionRange;
+    [HideInInspector]
+    public Vector3 previousLoudNoicePosition;
+    [HideInInspector]
+    public Vector3 previousLoudSubtlePosition;
+    [HideInInspector]
 
     [Header("Investigating")]
     public float investigatingSpeed = 3.0f;
@@ -69,6 +75,8 @@ public class Stalker : MonoBehaviour
         playerStates = playerGameObject.GetComponent<PlayerStates>();
 
         noice = new GameObject().transform;
+        previousLoudSubtlePosition = Vector3.positiveInfinity;
+        previousLoudNoicePosition = Vector3.positiveInfinity;
 
         relocatingState = new Relocating();
         inCoverState = new InCover();
@@ -128,9 +136,9 @@ public class Stalker : MonoBehaviour
         Gizmos.DrawWireSphere(eyePosition, viewDistance);
 
         // Desni krajni ugao (halfAngle desno)
-        Vector3 rightDirection = Quaternion.Euler(0, viewAngle / 2, 0) * transform.forward;
+        Vector3 rightDirection = Quaternion.Euler(0, viewAngle / 2, 0) * eyes.forward;
         // Levi krajni ugao (halfAngle levo)
-        Vector3 leftDirection = Quaternion.Euler(0, -viewAngle / 2, 0) * transform.forward;
+        Vector3 leftDirection = Quaternion.Euler(0, -viewAngle / 2, 0) * eyes.forward;
 
         Gizmos.color = Color.red;
         Gizmos.DrawLine(eyePosition, eyePosition + rightDirection * viewDistance);

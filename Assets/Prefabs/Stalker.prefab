@@ -1710,7 +1710,6 @@ Transform:
   - {fileID: 6562227552687881581}
   - {fileID: 5262948809880492181}
   - {fileID: 6720084122473473245}
-  - {fileID: 4878740155474424158}
   m_Father: {fileID: 6292085031185685405}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2665831740887310406
@@ -3616,6 +3615,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5492463151953087875}
+  - {fileID: 4878740155474424158}
   - {fileID: 2551551508284519723}
   - {fileID: 3058881808605472293}
   m_Father: {fileID: 0}
@@ -3656,6 +3656,7 @@ MonoBehaviour:
   agentMovement: {fileID: 0}
   animator: {fileID: 0}
   currentStalkerState: 
+  previousStalkerState: 
   player: {fileID: 0}
   eyes: {fileID: 4878740155474424158}
   playerStates: {fileID: 0}
@@ -3668,8 +3669,8 @@ MonoBehaviour:
   showCovers: 1
   secondsInCover: 7.81
   relocatingSpeed: 5.57
-  viewAngle: 102
-  viewDistance: 9.9
+  viewAngle: 120.1
+  viewDistance: 10.76
   obstacleMask:
     serializedVersion: 2
     m_Bits: 8
@@ -3679,9 +3680,11 @@ MonoBehaviour:
   canChasePlayer: 1
   chaseDelay: 0.87
   chaseSpeed: 3.5
-  loudNoiceDetectionRange: 13.5
-  subtleNoiceDetecitonRange: 9.7
+  loudNoiceDetectionRange: 14.7
+  subtleNoiceDetecitonRange: 16.83
   showNoiceDetectionRange: 1
+  previousLoudNoicePosition: {x: 0, y: 0, z: 0}
+  previousLoudSubtlePosition: {x: 0, y: 0, z: 0}
   investigatingSpeed: 2.72
   noice: {fileID: 0}
 --- !u!114 &1679114835901622007
@@ -4370,12 +4373,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7356730754235030481}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.6823918, y: -0.15299934, z: 0.14936061, w: 0.6990165}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.028754383, y: -0.03229186, z: 0.70363843, w: 0.70924145}
+  m_LocalPosition: {x: 0.02, y: 1.41, z: 0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4504808095918326694}
+  m_Father: {fileID: 7025364656711625194}
   m_LocalEulerAnglesHint: {x: -65.272, y: -87.004, z: 86.702}
 --- !u!1 &7365207111505831054
 GameObject:
@@ -4704,6 +4707,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7978832278974248467}
   - component: {fileID: 2018905588836244584}
+  - component: {fileID: 1868071223120819646}
   m_Layer: 0
   m_Name: polySurface1
   m_TagString: Untagged
@@ -4849,6 +4853,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0029489994, y: -0.024452299, z: 0.21175808}
     m_Extent: {x: 0.6575256, y: 0.9829174, z: 0.31602895}
   m_DirtyAABB: 0
+--- !u!114 &1868071223120819646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7979695347278511004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 2
+  eraseRenderer: 0
 --- !u!1 &8178182683648380307
 GameObject:
   m_ObjectHideFlags: 0

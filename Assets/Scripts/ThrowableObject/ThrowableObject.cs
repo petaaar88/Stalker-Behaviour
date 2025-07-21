@@ -7,7 +7,7 @@ public class ThrowableObject : MonoBehaviour
     public bool isCollided = false;
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Unisti");
+        NoiceListener.Instance.RegisterLoudNoice(gameObject.transform.position);
         isCollided = true;
     }
 }

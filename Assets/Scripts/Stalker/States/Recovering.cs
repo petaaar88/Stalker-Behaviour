@@ -23,6 +23,6 @@ public class Recovering : State<Stalker>
     public void Exit(Stalker stalker)
     {
         stalker.canChasePlayer = true;
-
+        stalker.previousStalkerState = "Recovering";
     }
 }

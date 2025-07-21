@@ -36,5 +36,7 @@ public class Chase : State<Stalker>
     {
         isTimerStarted = false;
         chaseTimer = 0f;
+
+        stalker.previousStalkerState = "Chase";
     }
 }

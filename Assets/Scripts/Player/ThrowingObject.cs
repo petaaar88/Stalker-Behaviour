@@ -11,7 +11,7 @@ public class ThrowingObject : MonoBehaviour
     private GameObject prefab = default;
     private bool isAiming;
     private vThirdPersonController playerController;
-    private vThirdPersonCamera camera;
+    private vThirdPersonCamera playerCamera;
     private float targetRightOffset = 0.2f;
     public float interpolationSpeed = 5f;
     private PlayerStates playerState;
@@ -70,7 +70,7 @@ public class ThrowingObject : MonoBehaviour
     {
         playerController = gameObject.transform.root.gameObject.GetComponent<vThirdPersonController>();
         playerState = gameObject.transform.root.gameObject.GetComponent<PlayerStates>();
-        camera = FindObjectOfType<vThirdPersonCamera>();
+        playerCamera = FindObjectOfType<vThirdPersonCamera>();
         InstanceContainer = new GameObject("Projectiles Container").transform;
 
         StartCoroutine(Procedure());
@@ -129,7 +129,7 @@ public class ThrowingObject : MonoBehaviour
 
         Shoot();
 
-        camera.rightOffset = Mathf.Lerp(camera.rightOffset, targetRightOffset, Time.deltaTime * interpolationSpeed);
+        playerCamera.rightOffset = Mathf.Lerp(playerCamera.rightOffset, targetRightOffset, Time.deltaTime * interpolationSpeed);
     }
 
     void Shoot()
@@ -145,7 +145,7 @@ public class ThrowingObject : MonoBehaviour
     float GetForceMultiplierFromCameraRotation()
     {
         // Uzmi X rotaciju kamere
-        float cameraXRotation = camera.transform.eulerAngles.x;
+        float cameraXRotation = playerCamera.transform.eulerAngles.x;
 
         // Konvertuj u -180 do 180 range
         if (cameraXRotation > 180f)
