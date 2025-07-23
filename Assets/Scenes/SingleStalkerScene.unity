@@ -3119,7 +3119,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   gridWorldSize: {x: 80, y: 80}
-  nodeRadius: 0.5
+  nodeRadius: 0.4
   blendFactor: 2
 --- !u!1 &1604046598
 GameObject:
@@ -3869,10 +3869,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1679114835901622007, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
-      propertyPath: sphereRadius
-      value: 1.17
-      objectReference: {fileID: 0}
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: player
       value: 

@@ -16,10 +16,16 @@ public class GlobalStalkerState : State<Stalker>
 
     public void Update(Stalker stalker)
     {
+        if (stalker.health.IsDead)
+        {
+            stalker.stateMachine.ChangeState(stalker.stateMachine.deathState);
+            return;
+        }
+
         // Delaying chasing
         if (sawPlayer)
         {
-            if (stalker.stateMachine.GetCurrentState() == stalker.recoveringState)
+            if (stalker.stateMachine.GetCurrentState() == stalker.stateMachine.recoveringState)
             {
                 sawPlayer = false;
                 chaseDelayTimer = 0;
@@ -32,7 +38,11 @@ public class GlobalStalkerState : State<Stalker>
             {
                 chaseDelayTimer = 0.0f;
                 sawPlayer = false;
-                stalker.stateMachine.ChangeState(stalker.chaseState);
+                
+                if(!stalker.isEngagingToPlayer)
+                    stalker.StartEngageToPlayer();
+
+                //stalker.stateMachine.ChangeState(stalker.stateMachine.chaseState);
 
             }
         }
@@ -55,35 +65,16 @@ public class GlobalStalkerState : State<Stalker>
                     sawPlayer = true;
         }
 
-        // Allowing to show line from stalker to player
-        if (stalker.stateMachine.GetCurrentState() == stalker.chaseState)
+        // Allowing to show line from stalker to player when stalker see player
+        if (stalker.isEngagingToPlayer)
             stalker.canSeePlayer = true;
         else
             stalker.canSeePlayer = false;
 
-        // Subtile Noice Detectoin
-        if (stalker.previousLoudSubtlePosition != NoiceListener.Instance.subtleNoicePosition)
-            if (Vector3.Distance(stalker.transform.position, NoiceListener.Instance.subtleNoicePosition) <= stalker.subtleNoiceDetecitonRange
-            && stalker.stateMachine.GetCurrentState() != stalker.relocatingState
-            && stalker.stateMachine.GetCurrentState() != stalker.chaseState
-            && stalker.stateMachine.GetCurrentState() != stalker.alertInvestigatingState)
-            {
-                stalker.previousLoudSubtlePosition = stalker.noice.position;
-                stalker.noice.position = NoiceListener.Instance.subtleNoicePosition;
-                stalker.stateMachine.ChangeState(stalker.investigatingState);
-            }
 
-        // Loud Noice Detection
-        if (stalker.previousLoudNoicePosition != NoiceListener.Instance.loudNoicePosition)
-            if (Vector3.Distance(stalker.transform.position, NoiceListener.Instance.loudNoicePosition) <= stalker.loudNoiceDetectionRange
-                && stalker.stateMachine.GetCurrentState() != stalker.relocatingState
-                && stalker.stateMachine.GetCurrentState() != stalker.chaseState) // ovde dodaj i bacanje vlase i borbu
-            {
-                stalker.previousLoudNoicePosition = stalker.noice.position;
-                stalker.noice.position = NoiceListener.Instance.loudNoicePosition; // prepravi ovo da se koriste zvukovi i za flasu i fight
-                stalker.stateMachine.ChangeState(stalker.alertInvestigatingState);
-
-            }
+        stalker.SubtleNoiceDetection();
+        stalker.LoudNoiceDetection();
+        
 
     }
 

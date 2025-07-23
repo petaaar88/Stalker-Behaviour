@@ -11,12 +11,10 @@ public class Stalker : MonoBehaviour
     public string currentStalkerState;
     public string previousStalkerState;
 
-    public StateMachine<Stalker> stateMachine;
+    public StalkerStateMachine stateMachine;
     [HideInInspector]
     public Transform player;
     public Transform eyes;
-    [HideInInspector]
-    public PlayerStates playerStates;
     public GameObject playerGameObject;
     public Transform playerSpotPoint;
 
@@ -36,11 +34,13 @@ public class Stalker : MonoBehaviour
     public bool canSeePlayer = false;
 
     [Header("Chase")]
-    public float chaseTime;
     [HideInInspector]
     public bool canChasePlayer = true;
     public float chaseDelay = 1.0f;
     public float chaseSpeed = 5.35f;
+
+    [Header("Engaging with player")]
+    public float engagementTime;
 
     [Header("Noice Detection")]
     public float loudNoiceDetectionRange;
@@ -57,47 +57,70 @@ public class Stalker : MonoBehaviour
     [HideInInspector]
     public Transform noice;
 
-    // States
-    public Relocating relocatingState;
-    public InCover inCoverState;
-    public Chase chaseState;
-    public Recovering recoveringState;
-    public Investigating investigatingState;
-    public LookingAround lookingAroundState;
-    public AlertInvestigating alertInvestigatingState;
-    public GlobalStalkerState globalState;
+    //Engage To Player State
+    public bool isEngagingToPlayer;
+
+    public Health health;
 
     void Start()
     {
+        health = GetComponent<Health>();
         animator = GetComponent<Animator>();
         agentMovement = GetComponent<AgentMovement>();
         player = playerGameObject.GetComponent<Transform>();
-        playerStates = playerGameObject.GetComponent<PlayerStates>();
 
         noice = new GameObject().transform;
         previousLoudSubtlePosition = Vector3.positiveInfinity;
         previousLoudNoicePosition = Vector3.positiveInfinity;
 
-        relocatingState = new Relocating();
-        inCoverState = new InCover();
-        chaseState = new Chase();
-        recoveringState = new Recovering();
-        investigatingState = new Investigating();
-        lookingAroundState = new LookingAround();
-        alertInvestigatingState = new AlertInvestigating();
-        globalState = new GlobalStalkerState();
+        animator.applyRootMotion = true;
 
-        stateMachine = new StateMachine<Stalker>(this);
-        stateMachine.SetCurrentState(relocatingState);
-        relocatingState.Enter(this);
+        stateMachine = new StalkerStateMachine(this);
+        stateMachine.SetCurrentState(stateMachine.relocatingState);
+        stateMachine.relocatingState.Enter(this);
 
-        stateMachine.SetGlobalState(globalState);
+        stateMachine.SetGlobalState(stateMachine.globalState);
     }
 
 
     void Update()
     {
         stateMachine.Update();
+    }
+
+    public void StartEngageToPlayer()
+    {
+        isEngagingToPlayer = true;
+        stateMachine.engagingPlayerState.Enter(this);
+    }
+
+    public void SubtleNoiceDetection()
+    {
+        // Subtile Noice Detectoin
+        if (previousLoudSubtlePosition != NoiceListener.Instance.subtleNoicePosition)
+            if (Vector3.Distance(transform.position, NoiceListener.Instance.subtleNoicePosition) <= subtleNoiceDetecitonRange
+            && stateMachine.GetCurrentState() != stateMachine.relocatingState
+            && !isEngagingToPlayer
+            && stateMachine.GetCurrentState() != stateMachine.alertInvestigatingState)
+            {
+                previousLoudSubtlePosition = noice.position;
+                noice.position = NoiceListener.Instance.subtleNoicePosition;
+                stateMachine.ChangeState(stateMachine.investigatingState);
+            }
+    }
+    public void LoudNoiceDetection()
+    {
+        // Loud Noice Detection
+        if (previousLoudNoicePosition != NoiceListener.Instance.loudNoicePosition)
+            if (Vector3.Distance(transform.position, NoiceListener.Instance.loudNoicePosition) <= loudNoiceDetectionRange
+                && stateMachine.GetCurrentState() != stateMachine.relocatingState
+                && !isEngagingToPlayer) // ovde dodaj i bacanje vlase i borbu
+            {
+                previousLoudNoicePosition = noice.position;
+                noice.position = NoiceListener.Instance.loudNoicePosition; // prepravi ovo da se koriste zvukovi i za flasu i fight
+                stateMachine.ChangeState(stateMachine.alertInvestigatingState);
+
+            }
     }
 
     private void OnDrawGizmos()
@@ -146,9 +169,20 @@ public class Stalker : MonoBehaviour
 
     }
 
+    // For animtion triggers
     public void EndInvestigation()
     {
         animator.SetTrigger("InvestigationEnd");
-        stateMachine.ChangeState(relocatingState);
+        stateMachine.ChangeState(stateMachine.relocatingState);
+    }
+    public void EndDeath()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Weapon"))
+            health.TakeDamage(10);
     }
 }

@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class StateMachine<T>
 {
-    private State<T> currentState = null;
-    private State<T> previousState = null;
-    private State<T> globalState = null;
+    protected State<T> currentState = null;
+    protected State<T> previousState = null;
+    public State<T> globalState = null;
 
-    private T entity;
+    protected T entity;
 
     public StateMachine(T entity){this.entity = entity;}
 
-    public void Update()
+    public virtual void Update()
     {
         if (globalState != null)
             globalState.Update(entity);

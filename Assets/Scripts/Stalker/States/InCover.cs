@@ -27,7 +27,7 @@ public class InCover : State<Stalker>
 
             stalker.currentCoverIndex = (stalker.currentCoverIndex + 1) % stalker.coversPositions.Count;
 
-            stalker.stateMachine.ChangeState(stalker.relocatingState);
+            stalker.stateMachine.ChangeState(stalker.stateMachine.relocatingState);
         }
     }
 
@@ -36,7 +36,7 @@ public class InCover : State<Stalker>
         isTimerStarted = false;
         coverTimer = 0f;
         stalker.previousStalkerState = "InCover";
-        //stalker.animator.SetTrigger("ExitCover");
+        stalker.animator.SetTrigger("ExitCover");
 
     }
 }

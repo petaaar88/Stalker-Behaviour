@@ -4,38 +4,30 @@ using UnityEngine;
 
 public class Chase : State<Stalker>
 {
-    private float chaseTimer = 0f;
-    private bool isTimerStarted = false;
+    
 
     public void Enter(Stalker stalker)
     {
         stalker.agentMovement.SetTarget(stalker.player);
         stalker.agentMovement.speed = stalker.chaseSpeed;
-        stalker.animator.SetTrigger("StartChase");
-        stalker.currentStalkerState = "Chase";
+        if (stalker.stateMachine.GetPreviousState() == stalker.stateMachine.waitingToAttackState)
+            stalker.animator.SetTrigger("PlayerMovedAway");
+        else
+            stalker.animator.SetTrigger("StartChase");
 
-        chaseTimer = 0f;
-        isTimerStarted = true;
+        stalker.currentStalkerState = "Chase";
+        
     }
 
     public void Update(Stalker stalker)
     {
-        if (!isTimerStarted) return;
-
-        chaseTimer += Time.deltaTime;
-
-        if (chaseTimer >= stalker.chaseTime)
-        {
-            isTimerStarted = false;
-           
-            stalker.stateMachine.ChangeState(stalker.recoveringState);
-        }
+        if (Vector3.Distance(stalker.transform.position, stalker.player.transform.position ) <= stalker.agentMovement.stoppingDistance)
+            stalker.stateMachine.ChangeState(stalker.stateMachine.waitingToAttackState);
     }
 
     public void Exit(Stalker stalker)
     {
-        isTimerStarted = false;
-        chaseTimer = 0f;
+        
 
         stalker.previousStalkerState = "Chase";
     }

@@ -10,7 +10,7 @@ public class AlertInvestigating : State<Stalker>
         stalker.currentStalkerState = "AlertInvestigating";
         stalker.agentMovement.speed = stalker.relocatingSpeed;
         stalker.agentMovement.SetTarget(stalker.noice);
-        if (stalker.stateMachine.GetPreviousState() == stalker.lookingAroundState)
+        if (stalker.stateMachine.GetPreviousState() == stalker.stateMachine.lookingAroundState)
             stalker.animator.SetTrigger("InvestigationEnd");
         else
             stalker.animator.SetTrigger("ExitCover");
@@ -19,7 +19,7 @@ public class AlertInvestigating : State<Stalker>
     public void Update(Stalker stalker)
     {
         if (Vector3.Distance(stalker.noice.position, stalker.transform.position) <= 2.0f)
-            stalker.stateMachine.ChangeState(stalker.lookingAroundState);
+            stalker.stateMachine.ChangeState(stalker.stateMachine.lookingAroundState);
     }
 
     public void Exit(Stalker stalker)
