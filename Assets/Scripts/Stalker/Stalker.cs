@@ -39,9 +39,6 @@ public class Stalker : MonoBehaviour
     public float chaseDelay = 1.0f;
     public float chaseSpeed = 5.35f;
 
-    [Header("Engaging with player")]
-    public float engagementTime;
-
     [Header("Noice Detection")]
     public float loudNoiceDetectionRange;
     public float subtleNoiceDetecitonRange;
@@ -56,6 +53,9 @@ public class Stalker : MonoBehaviour
     public float investigatingSpeed = 3.0f;
     [HideInInspector]
     public Transform noice;
+
+    [Header("Attacking")]
+    public bool canAttack = false;
 
     //Engage To Player State
     public bool isEngagingToPlayer;
@@ -178,6 +178,10 @@ public class Stalker : MonoBehaviour
     public void EndDeath()
     {
         Destroy(gameObject);
+    }
+    public void EndAttack()
+    {
+        stateMachine.ChangeState(stateMachine.waitingToAttackState);
     }
 
     private void OnTriggerEnter(Collider other)

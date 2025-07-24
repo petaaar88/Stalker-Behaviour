@@ -2103,6 +2103,7 @@ GameObject:
   - component: {fileID: 5484475556119016577}
   - component: {fileID: 7568918736820773781}
   - component: {fileID: 3565748982952985704}
+  - component: {fileID: 79613546503631911}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2231,7 +2232,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4979886713820977284}
   serializedVersion: 4
-  m_Mass: 50
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2326,6 +2327,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 4391120450057776966}
   throwableObject: {fileID: 8626318727583456965}
+--- !u!114 &79613546503631911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4979886713820977284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 444daad4f55e32f49a80663a6205def7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4993130732472483568
 GameObject:
   m_ObjectHideFlags: 0
@@ -3607,8 +3620,8 @@ MonoBehaviour:
   maxCameraAngle: 60
   maxForceMultiplier: 3
   prediction:
-    iterations: 96
-    rate: 30
+    iterations: 80
+    rate: 20
     line: {fileID: 680672426624654884}
 --- !u!1 &8540248299693879643
 GameObject:

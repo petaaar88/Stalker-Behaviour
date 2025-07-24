@@ -3671,7 +3671,7 @@ MonoBehaviour:
   showCovers: 1
   secondsInCover: 2.89
   relocatingSpeed: 5.57
-  viewAngle: 120.1
+  viewAngle: 100.5
   viewDistance: 10.76
   obstacleMask:
     serializedVersion: 2
@@ -3680,15 +3680,15 @@ MonoBehaviour:
   canSeePlayer: 0
   canChasePlayer: 1
   chaseDelay: 0.87
-  chaseSpeed: 3.5
-  engagementTime: 19.24
-  loudNoiceDetectionRange: 14.7
-  subtleNoiceDetecitonRange: 16.83
+  chaseSpeed: 4.01
+  loudNoiceDetectionRange: 16.3
+  subtleNoiceDetecitonRange: 11.76
   showNoiceDetectionRange: 1
   previousLoudNoicePosition: {x: 0, y: 0, z: 0}
   previousLoudSubtlePosition: {x: 0, y: 0, z: 0}
   investigatingSpeed: 2.72
   noice: {fileID: 0}
+  canAttack: 0
   isEngagingToPlayer: 0
   health: {fileID: 0}
 --- !u!114 &1679114835901622007
@@ -3765,7 +3765,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5775407431845438766}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 50
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3783,7 +3783,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1 &5797030772995907743
 GameObject:
   m_ObjectHideFlags: 0

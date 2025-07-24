@@ -22,7 +22,8 @@ public class Relocating : State<Stalker>
     {
         if (Vector3.Distance(stalker.coversPositions[stalker.currentCoverIndex].position, stalker.transform.position) <= stoppingDistance)
         {
-            //stalker.transform.LookAt(stalker.coversPositions[stalker.currentCoverIndex].GetChild(0));
+
+           // stalker.transform.LookAt(stalker.coversPositions[stalker.currentCoverIndex].GetChild(0));
                 
            // if(Vector3.Distance(stalker.transform.position,stalker.coversPositions[stalker.currentCoverIndex].GetComponentInChildren<Transform>().position) <= 2)
                 stalker.stateMachine.ChangeState(stalker.stateMachine.inCoverState);

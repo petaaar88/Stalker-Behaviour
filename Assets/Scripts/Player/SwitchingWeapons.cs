@@ -12,7 +12,9 @@ public class SwitchingWeapons : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        weapon.SetActive(true);
+        weapon.GetComponent<CapsuleCollider>().enabled = false;
+        GetComponent<MeleeAttack>().enabled = true;
     }
 
     // Update is called once per frame

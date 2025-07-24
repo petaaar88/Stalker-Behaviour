@@ -7,6 +7,7 @@ public class Death : State<Stalker>
     public void Enter(Stalker stalker)
     {
         stalker.agentMovement.speed = 0.0f;
+        stalker.GetComponent<CapsuleCollider>().enabled = false;
         stalker.animator.SetTrigger("IsDead");
     }
 

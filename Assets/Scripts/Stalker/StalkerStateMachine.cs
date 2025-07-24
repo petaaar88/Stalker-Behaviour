@@ -12,6 +12,7 @@ public class StalkerStateMachine : StateMachine<Stalker>
     public LookingAround lookingAroundState;
     public AlertInvestigating alertInvestigatingState;
     public WaitingToAttack waitingToAttackState;
+    public Attacking attackingState;
     public Death deathState;
 
     public EngagingPlayer engagingPlayerState;
@@ -28,6 +29,7 @@ public class StalkerStateMachine : StateMachine<Stalker>
         engagingPlayerState = new EngagingPlayer();
         waitingToAttackState = new WaitingToAttack();
         deathState = new Death();
+        attackingState = new Attacking();
         globalState = new GlobalStalkerState();
     }
 
