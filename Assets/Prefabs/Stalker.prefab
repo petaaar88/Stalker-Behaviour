@@ -3669,7 +3669,7 @@ MonoBehaviour:
   - {fileID: 0}
   currentCoverIndex: 0
   showCovers: 1
-  secondsInCover: 2.89
+  secondsInCover: 15.1
   relocatingSpeed: 5.57
   viewAngle: 100.5
   viewDistance: 10.76
@@ -3681,8 +3681,8 @@ MonoBehaviour:
   canChasePlayer: 1
   chaseDelay: 0.87
   chaseSpeed: 4.01
-  loudNoiceDetectionRange: 16.3
-  subtleNoiceDetecitonRange: 11.76
+  loudNoiceDetectionRange: 17
+  subtleNoiceDetecitonRange: 12.37
   showNoiceDetectionRange: 1
   previousLoudNoicePosition: {x: 0, y: 0, z: 0}
   previousLoudSubtlePosition: {x: 0, y: 0, z: 0}

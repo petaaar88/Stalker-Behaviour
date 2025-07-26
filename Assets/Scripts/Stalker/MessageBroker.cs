@@ -52,6 +52,8 @@ public class MessageBroker : MonoBehaviour
                 sortedNearestStalkersToPlayer[indexOfChoosenStalker].canAttack = true;
 
                 canChooseStalkerForAttacking = false;
+
+                NoiceListener.Instance.RegisterLoudNoice(sortedNearestStalkersToPlayer[indexOfChoosenStalker].transform.position);
             }
            
         }
