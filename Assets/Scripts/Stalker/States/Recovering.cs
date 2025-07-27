@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Recovering : State<Stalker>
 {
-    private float stoppingDistance = 2.0f;
 
     public void Enter(Stalker stalker)
     {
@@ -18,7 +17,7 @@ public class Recovering : State<Stalker>
 
     public void Update(Stalker stalker)
     {
-        if (Vector3.Distance(stalker.coversPositions[stalker.currentCoverIndex].position, stalker.transform.position) <= stoppingDistance)
+        if (Vector3.Distance(stalker.coversPositions[stalker.currentCoverIndex].position, stalker.transform.position) <= stalker.agentMovement.stoppingDistance)
             stalker.stateMachine.ChangeState(stalker.stateMachine.inCoverState);
     }
 

@@ -5,9 +5,6 @@ using UnityEngine;
 public class Relocating : State<Stalker>
 {
 
-    private float stoppingDistance =2.0f;
-    
-
     public void Enter(Stalker stalker)
     {
         
@@ -20,7 +17,7 @@ public class Relocating : State<Stalker>
 
     public void Update(Stalker stalker)
     {
-        if (Vector3.Distance(stalker.coversPositions[stalker.currentCoverIndex].position, stalker.transform.position) <= stoppingDistance)
+        if (Vector3.Distance(stalker.coversPositions[stalker.currentCoverIndex].position, stalker.transform.position) <= stalker.agentMovement.stoppingDistance)
         {
 
            // stalker.transform.LookAt(stalker.coversPositions[stalker.currentCoverIndex].GetChild(0));

@@ -15,7 +15,7 @@ public class Investigating : State<Stalker>
     }
     public void Update(Stalker stalker)
     {
-        if (Vector3.Distance(stalker.noice.position, stalker.transform.position) <= 2.0f)
+        if (Vector3.Distance(stalker.noice.position, stalker.transform.position) <= stalker.agentMovement.stoppingDistance)
             stalker.stateMachine.ChangeState(stalker.stateMachine.lookingAroundState);
     }
     public void Exit(Stalker stalker)

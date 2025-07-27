@@ -108,4 +108,6 @@ public class PathSolver : MonoBehaviour
     public void SetTarget(Transform target) { this.target = target; }
 
     public void SetSeeker(Transform seeker) { this.seeker = seeker; }
+
+   
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class AgentMovement : MonoBehaviour
 {
-    private PathSolver pathSolver;
+    [HideInInspector]
+    public PathSolver pathSolver;
     private Transform target;
     private List<Node> previousPath = null;
     private List<Vector3> nodesPositions = new List<Vector3>();
@@ -44,7 +45,7 @@ public class AgentMovement : MonoBehaviour
             SetNewPath();
 
 
-        if (Vector3.Distance(transform.position, target.position) <= stoppingDistance)
+        if (Vector3.Distance(transform.position, target.position) <= stoppingDistance - 0.6f) // 0.6f offset 
             return;
 
 

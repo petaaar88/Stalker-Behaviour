@@ -1,0 +1,1 @@
+{"root":[{"assemblyName":"MB-Physics-Prediction","nameSpace":"MB.PhysicsPrediction","className":"PredictionSystem","methodName":"OnLoad","loadTypes":1,"isUnityClass":false},{"assemblyName":"Unity.VisualScripting.Core","nameSpace":"Unity.VisualScripting","className":"RuntimeVSUsageUtility","methodName":"RuntimeInitializeOnLoadBeforeSceneLoad","loadTypes":1,"isUnityClass":true}]}

@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MultipleStalkersScene.unity
+    guid: 015f3561086c7d94ba0c5692d9f85119
   m_configObjects: {}

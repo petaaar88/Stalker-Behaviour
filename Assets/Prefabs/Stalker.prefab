@@ -3705,7 +3705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5.35
   baseOffset: -0.14
-  stoppingDistance: 1.17
+  stoppingDistance: 2.2
   rotationSpeed: 4
 --- !u!114 &4623606634266088221
 MonoBehaviour:
