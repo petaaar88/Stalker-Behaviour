@@ -76,7 +76,6 @@ public class Grid : MonoBehaviour
         return neighbours;
     }
 
-
     public Node NodeFromWorldPoint(Vector3 worldPosition)
     {
         float percentX = (worldPosition.x + gridWorldSize.x / 2) / gridWorldSize.x;
@@ -92,7 +91,7 @@ public class Grid : MonoBehaviour
         if (node.walkable)
             return node;
 
-        // Širimo se koncentrično dok ne pronađemo walkable čvor
+        // Sirimo se koncentricno dok ne pronađemo walkable cvor
         int maxRadius = Mathf.Max(gridSizeX, gridSizeY);
         for (int radius = 1; radius < maxRadius; radius++)
         {
@@ -119,12 +118,9 @@ public class Grid : MonoBehaviour
             }
         }
 
-        // Ako nijedan walkable nije pronađen (što ne bi trebalo da se desi), vraćamo originalni
+        // Ako nijedan walkable nije pronađen (sto ne bi trebalo da se desi), vracamo originalni
         return node;
     }
-
-
-
 
     public void AddNewPath(PathSolver pathSolver) { pathSolver.SetPathId(pathsNextId++); }
 

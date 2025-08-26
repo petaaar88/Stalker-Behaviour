@@ -114,10 +114,10 @@ public class Stalker : MonoBehaviour
         if (previousLoudNoicePosition != NoiceListener.Instance.loudNoicePosition)
             if (Vector3.Distance(transform.position, NoiceListener.Instance.loudNoicePosition) <= loudNoiceDetectionRange
                 && stateMachine.GetCurrentState() != stateMachine.relocatingState
-                && !isEngagingToPlayer) // ovde dodaj i bacanje vlase i borbu
+                && !isEngagingToPlayer) 
             {
                 previousLoudNoicePosition = noice.position;
-                noice.position = NoiceListener.Instance.loudNoicePosition; // prepravi ovo da se koriste zvukovi i za flasu i fight
+                noice.position = NoiceListener.Instance.loudNoicePosition; 
                 stateMachine.ChangeState(stateMachine.alertInvestigatingState);
 
             }

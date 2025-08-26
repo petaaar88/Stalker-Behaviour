@@ -11,7 +11,7 @@ public class AgentMovement : MonoBehaviour
     private List<Node> previousPath = null;
     private List<Vector3> nodesPositions = new List<Vector3>();
     private int currentNodeIndex = 0;
-
+    
 
     public float speed = 2.0f;
     public float baseOffset = 0.0f;
@@ -132,7 +132,7 @@ public class AgentMovement : MonoBehaviour
         previousBaseOffset = baseOffset;
 
     }
-
+    
     private void SetNewPath()
     {
         previousPath = pathSolver.path;
