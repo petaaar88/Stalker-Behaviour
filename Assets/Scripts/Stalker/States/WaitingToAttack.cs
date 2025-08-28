@@ -16,7 +16,8 @@ public class WaitingToAttack : State<Stalker>
 
     public void Update(Stalker stalker)
     {
-        MessageBroker.Instance.AddStalkersInQueueForAttack(stalker);
+        if(!MessageBroker.Instance.isEngagementOver)
+            MessageBroker.Instance.AddStalkersInQueueForAttack(stalker);
 
         if (Vector3.Distance(stalker.transform.position, stalker.player.transform.position) >= stalker.agentMovement.stoppingDistance + 2)
         {
