@@ -113,7 +113,9 @@ public class ThrowingObject : MonoBehaviour
             prediction.Line.positionCount = 0;
             playerController.isStrafing = false;
 
-            PredictionSystem.Record.Prefabs.Remove(timeline);
+            if(timeline != null)
+                PredictionSystem.Record.Prefabs.Remove(timeline);
+
             isAiming = false;
 
 
