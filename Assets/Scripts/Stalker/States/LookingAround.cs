@@ -16,6 +16,7 @@ public class LookingAround : State<Stalker>
     public void Exit(Stalker stalker)
     {
         stalker.previousStalkerState = "LookingAround";
+        stalker.animator.ResetTrigger("ArrievedAtNoicePosition");
     }
 
    

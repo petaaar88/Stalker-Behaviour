@@ -12,7 +12,7 @@ public class MessageBroker : MonoBehaviour
     public float engagementTime = 4.0f;
     public float engagementTimer = 0f;
     private bool isTimerStarted = false;
-    public bool isEngagementOver = false;
+    public bool isEngagementOver = true;
 
     public bool canChooseStalkerForAttacking = true;
 
@@ -46,6 +46,7 @@ public class MessageBroker : MonoBehaviour
                                                           .Take(2)
                                                           .ToList();
 
+            // Choose random stalker for attacking from stalkers that are near player
             if (sortedNearestStalkersToPlayer.Count > 0)
             {
                 int indexOfChoosenStalker = Random.Range(0, sortedNearestStalkersToPlayer.Count);
@@ -53,6 +54,7 @@ public class MessageBroker : MonoBehaviour
 
                 canChooseStalkerForAttacking = false;
 
+                // This will make loud noise in order to call other stalkers, stalker will come beacuse he heard loud noise, not beacuse other stalker called him
                 NoiceListener.Instance.RegisterLoudNoice(sortedNearestStalkersToPlayer[indexOfChoosenStalker].transform.position);
             }
            
@@ -72,8 +74,11 @@ public class MessageBroker : MonoBehaviour
 
     }
 
+    // All stalkers that saw player
     public void AddStalkerToEngagement(Stalker stalker)
     {
+        Debug.Log($"Stalker '{stalker.gameObject.name}' je engagovan za napad");
+
         engagedStalkers.Add(stalker);
         engagementTime += 2f;
 
@@ -84,6 +89,7 @@ public class MessageBroker : MonoBehaviour
         }
     }
 
+    // Stalker's that are near player
     public void AddStalkersInQueueForAttack(Stalker stalker)
     {
         stalkersWaitingForAttack.Add(stalker);

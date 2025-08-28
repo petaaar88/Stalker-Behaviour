@@ -25,5 +25,8 @@ public class AlertInvestigating : State<Stalker>
     public void Exit(Stalker stalker)
     {
         stalker.previousStalkerState = "AlertInvestigating";
+        stalker.animator.ResetTrigger("InvestigationEnd");
+       
+        stalker.animator.ResetTrigger("ExitCover");
     }
 }

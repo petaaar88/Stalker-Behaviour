@@ -21,5 +21,6 @@ public class Investigating : State<Stalker>
     public void Exit(Stalker stalker)
     {
         stalker.previousStalkerState = "Investigating";
+        stalker.animator.ResetTrigger("HeardSubtleNoice");
     }
 }

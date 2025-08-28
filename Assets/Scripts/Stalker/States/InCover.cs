@@ -13,6 +13,7 @@ public class InCover : State<Stalker>
         coverTimer = 0f;
         isTimerStarted = true;
         stalker.currentStalkerState = "InCover";
+        stalker.agentMovement.speed = 0.0f;
     }
 
     public void Update(Stalker stalker)

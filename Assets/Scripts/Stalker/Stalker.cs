@@ -98,6 +98,8 @@ public class Stalker : MonoBehaviour
     {
         // Subtile Noice Detectoin
         if (previousLoudSubtlePosition != NoiceListener.Instance.subtleNoicePosition)
+        {
+
             if (Vector3.Distance(transform.position, NoiceListener.Instance.subtleNoicePosition) <= subtleNoiceDetecitonRange
             && stateMachine.GetCurrentState() != stateMachine.relocatingState
             && !isEngagingToPlayer
@@ -107,11 +109,14 @@ public class Stalker : MonoBehaviour
                 noice.position = NoiceListener.Instance.subtleNoicePosition;
                 stateMachine.ChangeState(stateMachine.investigatingState);
             }
+        }
     }
     public void LoudNoiceDetection()
     {
         // Loud Noice Detection
         if (previousLoudNoicePosition != NoiceListener.Instance.loudNoicePosition)
+        {
+
             if (Vector3.Distance(transform.position, NoiceListener.Instance.loudNoicePosition) <= loudNoiceDetectionRange
                 && stateMachine.GetCurrentState() != stateMachine.relocatingState
                 && !isEngagingToPlayer) 
@@ -121,6 +126,7 @@ public class Stalker : MonoBehaviour
                 stateMachine.ChangeState(stateMachine.alertInvestigatingState);
 
             }
+        }
     }
 
     private void OnDrawGizmos()
@@ -181,7 +187,8 @@ public class Stalker : MonoBehaviour
     }
     public void EndAttack()
     {
-        stateMachine.ChangeState(stateMachine.waitingToAttackState);
+        if(!MessageBroker.Instance.isEngagementOver)
+            stateMachine.ChangeState(stateMachine.waitingToAttackState);
     }
 
     private void OnTriggerEnter(Collider other)
