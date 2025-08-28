@@ -77,7 +77,6 @@ public class MessageBroker : MonoBehaviour
     // All stalkers that saw player
     public void AddStalkerToEngagement(Stalker stalker)
     {
-        Debug.Log($"Stalker '{stalker.gameObject.name}' je engagovan za napad");
 
         engagedStalkers.Add(stalker);
         engagementTime += 2f;
