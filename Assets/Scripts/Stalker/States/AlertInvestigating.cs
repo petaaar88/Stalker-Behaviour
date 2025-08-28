@@ -19,7 +19,10 @@ public class AlertInvestigating : State<Stalker>
     public void Update(Stalker stalker)
     {
         if (Vector3.Distance(stalker.agentMovement.pathSolver.grid.NodeFromWorldPoint(stalker.noice.position).worldPosition, stalker.transform.position) <= stalker.agentMovement.stoppingDistance)
+        {
+            stalker.previousLoudSubtlePosition = NoiceListener.Instance.subtleNoicePosition;
             stalker.stateMachine.ChangeState(stalker.stateMachine.lookingAroundState);
+        }
     }
 
     public void Exit(Stalker stalker)
