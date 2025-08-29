@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class AlertInvestigating : State<Stalker>
 {
+    private bool isArrivedAtNoiseOriginPosition = false; // TODO: rename
+    private Vector3 noiseOriginPosition;
+
     public void Enter(Stalker stalker)
     {
         stalker.currentStalkerState = "AlertInvestigating";
@@ -14,6 +17,11 @@ public class AlertInvestigating : State<Stalker>
             stalker.animator.SetTrigger("InvestigationEnd");
         else
             stalker.animator.SetTrigger("ExitCover");
+
+        NoiseBroker.Instance.AddStalkerToInspectNoiseOrigin(stalker.noice.position, stalker);
+        noiseOriginPosition = stalker.noice.position;
+        isArrivedAtNoiseOriginPosition = false;
+
     }
 
     public void Update(Stalker stalker)
@@ -21,6 +29,7 @@ public class AlertInvestigating : State<Stalker>
         if (Vector3.Distance(stalker.agentMovement.pathSolver.grid.NodeFromWorldPoint(stalker.noice.position).worldPosition, stalker.transform.position) <= stalker.agentMovement.stoppingDistance)
         {
             stalker.previousLoudSubtlePosition = NoiceListener.Instance.subtleNoicePosition;
+            isArrivedAtNoiseOriginPosition = true;
             stalker.stateMachine.ChangeState(stalker.stateMachine.lookingAroundState);
         }
     }
@@ -31,5 +40,9 @@ public class AlertInvestigating : State<Stalker>
         stalker.animator.ResetTrigger("InvestigationEnd");
        
         stalker.animator.ResetTrigger("ExitCover");
+
+        if (!isArrivedAtNoiseOriginPosition)
+            NoiseBroker.Instance.RemoveStalkerFromInspectingNoiseOrigin(noiseOriginPosition, stalker);
+
     }
 }
