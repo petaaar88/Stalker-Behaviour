@@ -10,6 +10,13 @@ public class NoiseBroker : MonoBehaviour
 
     private int lookAroundAnimationsNumber = 4;
 
+    [SerializeField]
+    private float radiusOfNoiseOriginRange = 2.0f;
+    private int maxAttemptsOfFindingRandomPosition = 100;
+    [SerializeField]
+    private float stalkerColliderMultiplier = 1.0f;
+
+
     [Header("Debug Settings")]
     [SerializeField] private bool enableDebugLogs = true;
     [SerializeField] private int vectorRoundingDecimals = 2;
@@ -41,14 +48,34 @@ public class NoiseBroker : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
+    public Vector3 FindNonOverlappingPoint(Vector3 center, float objectRadius, List<Vector3> existingPoints)
     {
+        Vector3 candidate = Vector3.zero;
 
-    }
+        for (int attempts = 0; attempts < maxAttemptsOfFindingRandomPosition; attempts++)
+        {
+            Vector2 randomPoint2D = Random.insideUnitCircle * radiusOfNoiseOriginRange;
+            candidate = new Vector3(randomPoint2D.x + center.x, center.y, randomPoint2D.y + center.z);
 
-    void Update()
-    {
+            bool overlaps = false;
+            foreach (var pos in existingPoints)
+            {
+                if (Vector3.Distance(pos, candidate) < objectRadius * 2f)
+                {
+                    overlaps = true;
+                    break;
+                }
+            }
 
+            if (!overlaps)
+            {
+                return candidate; // Našli smo validnu tačku
+            }
+        }
+
+        // Ako posle maxAttempts nismo našli nepreklapajuću tačku, vratimo poslednjeg kandidata
+        Debug.LogWarning("Nije moguće pronaći nepreklapajuću tačku, vraćamo poslednjeg kandidata.");
+        return candidate;
     }
 
     // Helper metoda za zaokruživanje Vector3
@@ -60,6 +87,60 @@ public class NoiseBroker : MonoBehaviour
             Mathf.Round(pos.y * multiplier) / multiplier,
             Mathf.Round(pos.z * multiplier) / multiplier
         );
+    }
+
+    public Vector3 GetLandingPosition(Vector3 noisePosition, Stalker stalker)
+    {
+        // Zaokruži poziciju
+        noisePosition = RoundVector3(noisePosition);
+
+        if (!noiseInvestigationDict.ContainsKey(noisePosition))
+        {
+            if (enableDebugLogs)
+                Debug.LogWarning($"[NoiseBroker] Position {noisePosition} not found in dictionary!");
+            return Vector3.zero;
+        }
+
+        NoiseInvestigators investigators = noiseInvestigationDict[noisePosition];
+
+        if (investigators.StalkersThatInspectNoiseOrigin.TryGetValue(stalker, out StalkerData data))
+        {
+            if (enableDebugLogs)
+                Debug.Log($"[NoiseBroker] Found landing position {data.LandingPosition} for stalker {stalker.name}");
+            return data.LandingPosition;
+        }
+
+        if (enableDebugLogs)
+            Debug.LogWarning($"[NoiseBroker] Stalker {stalker.name} not found at position {noisePosition}");
+
+        return Vector3.zero;
+    }
+
+    public List<Vector3> GetAllLandingPositions(Vector3 noisePosition)
+    {
+        // Zaokruži poziciju
+        noisePosition = RoundVector3(noisePosition);
+
+        List<Vector3> landingPositions = new List<Vector3>();
+
+        if (!noiseInvestigationDict.ContainsKey(noisePosition))
+        {
+            if (enableDebugLogs)
+                Debug.LogWarning($"[NoiseBroker] No investigations found at position {noisePosition}");
+            return landingPositions; // Vraća praznu listu
+        }
+
+        NoiseInvestigators investigators = noiseInvestigationDict[noisePosition];
+
+        foreach (var stalkerData in investigators.StalkersThatInspectNoiseOrigin.Values)
+        {
+            landingPositions.Add(stalkerData.LandingPosition);
+        }
+
+        if (enableDebugLogs)
+            Debug.Log($"[NoiseBroker] Found {landingPositions.Count} landing positions at noise position {noisePosition}");
+
+        return landingPositions;
     }
 
     public void AddStalkerToInspectNoiseOrigin(Vector3 noisePosition, Stalker stalker)
@@ -115,10 +196,12 @@ public class NoiseBroker : MonoBehaviour
             chosenIndex = Random.Range(0, lookAroundAnimationsNumber);
         }
 
+        Vector3 stalkerPositionToInspect = FindNonOverlappingPoint(noisePosition, stalker.GetComponent<CapsuleCollider>().radius * stalkerColliderMultiplier, GetAllLandingPositions(noisePosition));
+
         // 4. Dodavanje stalkera
         investigators.StalkersThatInspectNoiseOrigin.Add(
             stalker,
-            new StalkerData(chosenIndex, Vector3.zero) // TODO: zameni sa realnom pozicijom
+            new StalkerData(chosenIndex, stalkerPositionToInspect) 
         );
 
         noiseInvestigationDict[noisePosition] = investigators;
@@ -243,6 +326,19 @@ public class NoiseBroker : MonoBehaviour
             if (enableDebugLogs)
                 Debug.Log($"[NoiseBroker] Cleared all investigations at position {noisePosition}");
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (!enableDebugLogs)
+            return;
+
+        Gizmos.color = Color.red;
+
+        foreach (Vector3 key in noiseInvestigationDict.Keys)
+            Gizmos.DrawWireSphere(key, radiusOfNoiseOriginRange);
+
+
     }
 
     // Debug metode

@@ -286,7 +286,7 @@ BlendTree:
     m_Motion: {fileID: 7400000, guid: 5862835e9b1454648ac24629547c4914, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 0.59
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
@@ -294,7 +294,7 @@ BlendTree:
     m_Motion: {fileID: 7400000, guid: be3161a4b6ba41a459679dd87ea9f3c1, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 0.59
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
@@ -302,7 +302,7 @@ BlendTree:
     m_Motion: {fileID: 7400000, guid: 24fdf81e3c80ce94e8c0d59e33345c5b, type: 2}
     m_Threshold: 2
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 0.59
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
@@ -310,7 +310,7 @@ BlendTree:
     m_Motion: {fileID: 7400000, guid: 46eb2955224ad4342ae580f888007af7, type: 2}
     m_Threshold: 3
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 0.59
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
@@ -358,7 +358,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LookAround
-  m_Speed: 0.59
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -1737509988337863072}

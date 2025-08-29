@@ -53,6 +53,8 @@ public class Stalker : MonoBehaviour
     public float investigatingSpeed = 3.0f;
     [HideInInspector]
     public Transform noice;
+    [HideInInspector]
+    public Transform investigationNoise;
 
     [Header("Attacking")]
     public bool canAttack = false;
@@ -70,6 +72,7 @@ public class Stalker : MonoBehaviour
         player = playerGameObject.GetComponent<Transform>();
 
         noice = new GameObject().transform;
+        investigationNoise = new GameObject().transform;
         previousLoudSubtlePosition = Vector3.positiveInfinity;
         previousLoudNoicePosition = Vector3.positiveInfinity;
 

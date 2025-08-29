@@ -12,7 +12,8 @@ public class AlertInvestigating : State<Stalker>
     {
         stalker.currentStalkerState = "AlertInvestigating";
         stalker.agentMovement.speed = stalker.relocatingSpeed;
-        stalker.agentMovement.SetTarget(stalker.noice);
+
+        
         if (stalker.stateMachine.GetPreviousState() == stalker.stateMachine.lookingAroundState)
             stalker.animator.SetTrigger("InvestigationEnd");
         else
@@ -22,11 +23,13 @@ public class AlertInvestigating : State<Stalker>
         noiseOriginPosition = stalker.noice.position;
         isArrivedAtNoiseOriginPosition = false;
 
+        stalker.investigationNoise.position = NoiseBroker.Instance.GetLandingPosition(stalker.noice.position, stalker);
+        stalker.agentMovement.SetTarget(stalker.investigationNoise);
     }
 
     public void Update(Stalker stalker)
     {
-        if (Vector3.Distance(stalker.agentMovement.pathSolver.grid.NodeFromWorldPoint(stalker.noice.position).worldPosition, stalker.transform.position) <= stalker.agentMovement.stoppingDistance)
+        if (Vector3.Distance(stalker.agentMovement.pathSolver.grid.NodeFromWorldPoint(stalker.investigationNoise.position).worldPosition, stalker.transform.position) <= stalker.agentMovement.stoppingDistance)
         {
             stalker.previousLoudSubtlePosition = NoiceListener.Instance.subtleNoicePosition;
             isArrivedAtNoiseOriginPosition = true;

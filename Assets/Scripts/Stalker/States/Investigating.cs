@@ -14,14 +14,19 @@ public class Investigating : State<Stalker>
         stalker.animator.SetTrigger("HeardSubtleNoice");
         stalker.currentStalkerState = "Investigating";
 
+        
+
         NoiseBroker.Instance.AddStalkerToInspectNoiseOrigin(stalker.noice.position, stalker);
         noiseOriginPosition = stalker.noice.position;
         isArrivedAtNoiseOriginPosition = false;
+
+        stalker.investigationNoise.position = NoiseBroker.Instance.GetLandingPosition(stalker.noice.position, stalker);
+        stalker.agentMovement.SetTarget(stalker.investigationNoise);
     }
 
     public void Update(Stalker stalker)
     {
-        if (Vector3.Distance(stalker.noice.position, stalker.transform.position) <= stalker.agentMovement.stoppingDistance)
+        if (Vector3.Distance(stalker.investigationNoise.position, stalker.transform.position) <= stalker.agentMovement.stoppingDistance)
         {
             isArrivedAtNoiseOriginPosition = true;
             stalker.stateMachine.ChangeState(stalker.stateMachine.lookingAroundState);
