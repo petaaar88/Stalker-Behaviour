@@ -76,6 +76,21 @@ public class Grid : MonoBehaviour
         return neighbours;
     }
 
+    public Node NodeFromAgentPosition(Vector3 seekerPosition)
+    {
+        float percentX = (seekerPosition.x + gridWorldSize.x / 2) / gridWorldSize.x;
+        float percentY = (seekerPosition.z + gridWorldSize.y / 2) / gridWorldSize.y;
+        percentX = Mathf.Clamp01(percentX);
+        percentY = Mathf.Clamp01(percentY);
+
+        int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
+        int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
+
+        Node node = grid[x, y];
+        
+        return node;
+    }
+
     public Node NodeFromWorldPoint(Vector3 worldPosition)
     {
         float percentX = (worldPosition.x + gridWorldSize.x / 2) / gridWorldSize.x;

@@ -7,11 +7,11 @@ public class AgentMovement : MonoBehaviour
 {
     [HideInInspector]
     public PathSolver pathSolver;
-    private Transform target;
-    private List<Node> previousPath = null;
+    public Transform target;
+    public List<Node> previousPath = null;
     private List<Vector3> nodesPositions = new List<Vector3>();
-    private int currentNodeIndex = 0;
-    
+    public int currentNodeIndex = 0;
+
 
     public float speed = 2.0f;
     public float baseOffset = 0.0f;
@@ -19,10 +19,14 @@ public class AgentMovement : MonoBehaviour
     public float stoppingDistance = 0.0f;
     public float rotationSpeed = 1.0f;
 
+    // Debugging
+
+    public bool isUsingAStarDebug = false;
+
     private void Awake()
     {
         pathSolver = GetComponent<PathSolver>();
-        
+
     }
 
     void Start()
@@ -50,24 +54,20 @@ public class AgentMovement : MonoBehaviour
 
 
         // Move agent
-        Vector3 direction = target.position - transform.position;
+        Vector3 direction = pathSolver.grid.NodeFromWorldPoint(target.position).worldPosition - transform.position;
         float distance = direction.magnitude;
 
         if (Physics.Raycast(transform.position, direction.normalized, out RaycastHit hit, distance, pathSolver.grid.unwalkableMask))
         {
+            isUsingAStarDebug = true;
             pathSolver.canFindPath = true;
             UsePathfinding();
         }
         else
         {
+            isUsingAStarDebug = false;
             pathSolver.canFindPath = false;
-            if (pathSolver.path != null)
-            {
-                previousPath.Clear();
-                nodesPositions.Clear();
-                pathSolver.path.Clear();
-                currentNodeIndex = 0;
-            }
+
             GoStraightToTarget(direction);
         }
 
@@ -75,32 +75,35 @@ public class AgentMovement : MonoBehaviour
 
     private void UsePathfinding()
     {
+        if (nodesPositions == null || currentNodeIndex >= nodesPositions.Count)
+            return;
 
-        if (nodesPositions != null)
-            if (nodesPositions.Count != currentNodeIndex)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, nodesPositions[currentNodeIndex], speed * Time.deltaTime);
+        Vector3 targetPos = nodesPositions[currentNodeIndex];
+        Vector3 direction = targetPos - transform.position;
 
-                Vector3 direction = nodesPositions[currentNodeIndex] - transform.position;
+        // Ako smo dovoljno blizu, pređi na sledeći waypoint
+        if (direction.sqrMagnitude <= 0.25f) // 0.5f^2
+        {
+            currentNodeIndex++;
+            return;
+        }
 
-                // Rotate towards next waypoint
-                if (direction != Vector3.zero)
-                {
-                    Quaternion targetRotation = Quaternion.LookRotation(direction);
+        // Rotacija
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            Quaternion smoothRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Euler(0, smoothRotation.eulerAngles.y, 0);
+        }
 
-                    Quaternion smoothRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-                    transform.rotation = Quaternion.Euler(0, smoothRotation.eulerAngles.y, 0);
-                }
-
-
-                if (transform.position == nodesPositions[currentNodeIndex])
-                    currentNodeIndex++;
-            }
+        // Kretanje
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
     }
+
 
     private void GoStraightToTarget(Vector3 direction)
     {
-        Vector3 targetPosition = target.position;
+        Vector3 targetPosition = pathSolver.grid.NodeFromWorldPoint(target.position).worldPosition;
         targetPosition.y = transform.position.y;
 
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
@@ -132,7 +135,7 @@ public class AgentMovement : MonoBehaviour
         previousBaseOffset = baseOffset;
 
     }
-    
+
     private void SetNewPath()
     {
         previousPath = pathSolver.path;
