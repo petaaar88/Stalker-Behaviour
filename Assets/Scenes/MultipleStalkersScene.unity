@@ -1255,11 +1255,11 @@ PrefabInstance:
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[0]
       value: 
-      objectReference: {fileID: 2031521526}
+      objectReference: {fileID: 2031521527}
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[1]
       value: 
-      objectReference: {fileID: 352083955}
+      objectReference: {fileID: 352083956}
     - target: {fileID: 5747187849045433383, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: m_Mass
       value: 50
@@ -1477,11 +1477,11 @@ PrefabInstance:
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[0]
       value: 
-      objectReference: {fileID: 998082247}
+      objectReference: {fileID: 998082248}
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[1]
       value: 
-      objectReference: {fileID: 1117553162}
+      objectReference: {fileID: 1117553163}
     - target: {fileID: 5747187849045433383, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: m_Mass
       value: 50
@@ -1718,6 +1718,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 0
+  mirrored: 0
 --- !u!4 &190007657 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 892681653972922701, guid: 860e60de9587df3498805c67c1457142, type: 3}
@@ -2469,7 +2472,7 @@ GameObject:
   - component: {fileID: 290191238}
   - component: {fileID: 290191239}
   m_Layer: 0
-  m_Name: waypoint (14)
+  m_Name: Red Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2484,7 +2487,7 @@ Transform:
   m_GameObject: {fileID: 290191237}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.19, y: -6.31, z: 15.07}
+  m_LocalPosition: {x: 12.82, y: -6.31, z: 20.258}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2502,6 +2505,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 81.03
+  mirrored: 0
 --- !u!1 &295033527
 GameObject:
   m_ObjectHideFlags: 0
@@ -2513,7 +2519,7 @@ GameObject:
   - component: {fileID: 295033528}
   - component: {fileID: 295033529}
   m_Layer: 0
-  m_Name: waypoint (19)
+  m_Name: White Cover 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2528,7 +2534,7 @@ Transform:
   m_GameObject: {fileID: 295033527}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36.19, y: -6.31, z: 24.27}
+  m_LocalPosition: {x: 35.347, y: -6.31, z: 24.993}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2546,6 +2552,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 184.18
+  mirrored: 1
 --- !u!1 &306626989
 GameObject:
   m_ObjectHideFlags: 0
@@ -2872,7 +2881,7 @@ GameObject:
   - component: {fileID: 318715408}
   - component: {fileID: 318715409}
   m_Layer: 0
-  m_Name: waypoint (4)
+  m_Name: Green Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2887,7 +2896,7 @@ Transform:
   m_GameObject: {fileID: 318715407}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 38.57, y: -6.76, z: 37.25}
+  m_LocalPosition: {x: 37.315, y: -6.76, z: 37.117}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2905,6 +2914,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 81.03
+  mirrored: 0
 --- !u!1 &323367741
 GameObject:
   m_ObjectHideFlags: 0
@@ -3336,7 +3348,7 @@ GameObject:
   - component: {fileID: 352083955}
   - component: {fileID: 352083956}
   m_Layer: 0
-  m_Name: waypoint (11)
+  m_Name: Black Cover 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3351,7 +3363,7 @@ Transform:
   m_GameObject: {fileID: 352083954}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.23, y: -6.76, z: 0.86}
+  m_LocalPosition: {x: 17.55, y: -6.76, z: 6.876}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3369,6 +3381,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 103.55
+  mirrored: 1
 --- !u!1 &361128972
 GameObject:
   m_ObjectHideFlags: 0
@@ -4343,7 +4358,7 @@ GameObject:
   - component: {fileID: 437166643}
   - component: {fileID: 437166644}
   m_Layer: 0
-  m_Name: waypoint (12)
+  m_Name: Pink Cover 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4358,7 +4373,7 @@ Transform:
   m_GameObject: {fileID: 437166642}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.65, y: -6.76, z: 2.76}
+  m_LocalPosition: {x: -5, y: -6.76, z: 2.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4376,6 +4391,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 169.46
+  mirrored: 0
 --- !u!1 &438990583
 GameObject:
   m_ObjectHideFlags: 0
@@ -5004,11 +5022,11 @@ PrefabInstance:
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[0]
       value: 
-      objectReference: {fileID: 437166643}
+      objectReference: {fileID: 1406365684}
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[1]
       value: 
-      objectReference: {fileID: 1406365683}
+      objectReference: {fileID: 437166644}
     - target: {fileID: 5747187849045433383, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: m_Mass
       value: 50
@@ -6546,7 +6564,7 @@ GameObject:
   - component: {fileID: 663525758}
   - component: {fileID: 663525759}
   m_Layer: 0
-  m_Name: waypoint (8)
+  m_Name: Yellow Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6561,7 +6579,7 @@ Transform:
   m_GameObject: {fileID: 663525757}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.11, y: -6.76, z: 10.2}
+  m_LocalPosition: {x: -8.586, y: -6.76, z: 10.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6579,6 +6597,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 81.03
+  mirrored: 0
 --- !u!1 &667906061
 GameObject:
   m_ObjectHideFlags: 0
@@ -8553,11 +8574,11 @@ PrefabInstance:
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[0]
       value: 
-      objectReference: {fileID: 2145687872}
+      objectReference: {fileID: 2145687873}
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[1]
       value: 
-      objectReference: {fileID: 1720972161}
+      objectReference: {fileID: 1720972162}
     - target: {fileID: 5775407431845438766, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: m_Name
       value: Blue Stalker
@@ -9132,11 +9153,11 @@ PrefabInstance:
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[0]
       value: 
-      objectReference: {fileID: 290191238}
+      objectReference: {fileID: 290191239}
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[1]
       value: 
-      objectReference: {fileID: 2019949521}
+      objectReference: {fileID: 2019949522}
     - target: {fileID: 5775407431845438766, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: m_Name
       value: Red Stalker
@@ -9463,11 +9484,11 @@ PrefabInstance:
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[0]
       value: 
-      objectReference: {fileID: 663525758}
+      objectReference: {fileID: 663525759}
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[1]
       value: 
-      objectReference: {fileID: 2084660153}
+      objectReference: {fileID: 2084660154}
     - target: {fileID: 5747187849045433383, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: m_Mass
       value: 50
@@ -10716,7 +10737,7 @@ Transform:
   m_GameObject: {fileID: 996881712}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: 29.3, y: -6.53, z: 50.12}
+  m_LocalPosition: {x: 29.3, y: -6.53, z: 50.08}
   m_LocalScale: {x: 3.7038097, y: 8.6567, z: 2.7786117}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10804,7 +10825,7 @@ GameObject:
   - component: {fileID: 998082247}
   - component: {fileID: 998082248}
   m_Layer: 0
-  m_Name: waypoint (6)
+  m_Name: Purple Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10819,7 +10840,7 @@ Transform:
   m_GameObject: {fileID: 998082246}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 31.27, y: -6.76, z: 20.15}
+  m_LocalPosition: {x: 29.76, y: -6.76, z: 20.124}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10837,6 +10858,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 81.03
+  mirrored: 0
 --- !u!1 &998098147
 GameObject:
   m_ObjectHideFlags: 0
@@ -11989,7 +12013,7 @@ GameObject:
   - component: {fileID: 1117553162}
   - component: {fileID: 1117553163}
   m_Layer: 0
-  m_Name: waypoint (7)
+  m_Name: Purple Cover 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12004,7 +12028,7 @@ Transform:
   m_GameObject: {fileID: 1117553161}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 38.79, y: -6.76, z: 14.89}
+  m_LocalPosition: {x: 37.348, y: -6.76, z: 14.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12022,6 +12046,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 103
+  mirrored: 1
 --- !u!1 &1137439861
 GameObject:
   m_ObjectHideFlags: 0
@@ -13081,7 +13108,7 @@ GameObject:
   - component: {fileID: 1234773563}
   - component: {fileID: 1234773564}
   m_Layer: 0
-  m_Name: waypoint (2)
+  m_Name: Cyan Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13096,7 +13123,7 @@ Transform:
   m_GameObject: {fileID: 1234773562}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 38.75, y: -6.18, z: 51.39}
+  m_LocalPosition: {x: 37.27, y: -6.18, z: 50.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13114,6 +13141,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 0
+  mirrored: 0
 --- !u!1001 &1249509352
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13153,11 +13183,11 @@ PrefabInstance:
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[0]
       value: 
-      objectReference: {fileID: 1234773563}
+      objectReference: {fileID: 1234773564}
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[1]
       value: 
-      objectReference: {fileID: 1732036993}
+      objectReference: {fileID: 1732036994}
     - target: {fileID: 5747187849045433383, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: m_Mass
       value: 50
@@ -13242,7 +13272,7 @@ GameObject:
   - component: {fileID: 1254622793}
   - component: {fileID: 1254622794}
   m_Layer: 0
-  m_Name: waypoint (5)
+  m_Name: Green Cover 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13257,7 +13287,7 @@ Transform:
   m_GameObject: {fileID: 1254622792}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 39.42, y: -6.76, z: 22.2}
+  m_LocalPosition: {x: 42.429, y: -6.76, z: 21.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13275,6 +13305,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 0
+  mirrored: 0
 --- !u!1 &1273924418
 GameObject:
   m_ObjectHideFlags: 0
@@ -15128,7 +15161,7 @@ GameObject:
   - component: {fileID: 1406365683}
   - component: {fileID: 1406365684}
   m_Layer: 0
-  m_Name: waypoint (13)
+  m_Name: Pink Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15143,7 +15176,7 @@ Transform:
   m_GameObject: {fileID: 1406365682}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.99, y: -6.76, z: -0.43}
+  m_LocalPosition: {x: -17.635, y: -6.76, z: -2.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15161,6 +15194,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 103.55
+  mirrored: 1
 --- !u!1 &1407587561
 GameObject:
   m_ObjectHideFlags: 0
@@ -18380,7 +18416,7 @@ GameObject:
   - component: {fileID: 1720972161}
   - component: {fileID: 1720972162}
   m_Layer: 0
-  m_Name: waypoint (1)
+  m_Name: Blue Cover 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18395,7 +18431,7 @@ Transform:
   m_GameObject: {fileID: 1720972160}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.95, y: -6.76, z: 9.48}
+  m_LocalPosition: {x: -0.72, y: -6.76, z: 9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18413,6 +18449,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 103.55
+  mirrored: 1
 --- !u!1 &1727333305
 GameObject:
   m_ObjectHideFlags: 0
@@ -18663,7 +18702,7 @@ GameObject:
   - component: {fileID: 1732036993}
   - component: {fileID: 1732036994}
   m_Layer: 0
-  m_Name: waypoint (3)
+  m_Name: Cyan cover 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18678,7 +18717,7 @@ Transform:
   m_GameObject: {fileID: 1732036992}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 44.96, y: -6.76, z: 45.76}
+  m_LocalPosition: {x: 43.29, y: -6.76, z: 45.064}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18696,6 +18735,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 103
+  mirrored: 1
 --- !u!1 &1742212365
 GameObject:
   m_ObjectHideFlags: 0
@@ -21245,7 +21287,7 @@ GameObject:
   - component: {fileID: 1954341490}
   - component: {fileID: 1954341491}
   m_Layer: 0
-  m_Name: waypoint (18)
+  m_Name: White Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21260,7 +21302,7 @@ Transform:
   m_GameObject: {fileID: 1954341489}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24.34, y: -6.31, z: 40.09}
+  m_LocalPosition: {x: 22.69, y: -6.31, z: 40.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21278,6 +21320,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 81.03
+  mirrored: 0
 --- !u!1 &1961522482
 GameObject:
   m_ObjectHideFlags: 0
@@ -21534,11 +21579,11 @@ PrefabInstance:
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[0]
       value: 
-      objectReference: {fileID: 1954341490}
+      objectReference: {fileID: 1954341491}
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[1]
       value: 
-      objectReference: {fileID: 295033528}
+      objectReference: {fileID: 295033529}
     - target: {fileID: 5775407431845438766, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: m_Name
       value: White Stalker
@@ -21640,6 +21685,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 0
+  mirrored: 0
 --- !u!1 &2005422140
 GameObject:
   m_ObjectHideFlags: 0
@@ -21788,11 +21836,11 @@ PrefabInstance:
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[0]
       value: 
-      objectReference: {fileID: 318715408}
+      objectReference: {fileID: 318715409}
     - target: {fileID: 5535477254816561525, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: coversPositions.Array.data[1]
       value: 
-      objectReference: {fileID: 1254622793}
+      objectReference: {fileID: 1254622794}
     - target: {fileID: 5747187849045433383, guid: e8c8aa4ddadd3f047b2b77e82dc6e91d, type: 3}
       propertyPath: m_Mass
       value: 50
@@ -21877,7 +21925,7 @@ GameObject:
   - component: {fileID: 2019949521}
   - component: {fileID: 2019949522}
   m_Layer: 0
-  m_Name: waypoint (15)
+  m_Name: Red Cover 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21892,7 +21940,7 @@ Transform:
   m_GameObject: {fileID: 2019949520}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.25, y: -6.31, z: 19.47}
+  m_LocalPosition: {x: 21.504, y: -6.31, z: 19.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21910,6 +21958,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 169.46
+  mirrored: 0
 --- !u!1 &2022738717
 GameObject:
   m_ObjectHideFlags: 0
@@ -22153,7 +22204,7 @@ GameObject:
   - component: {fileID: 2031521526}
   - component: {fileID: 2031521527}
   m_Layer: 0
-  m_Name: waypoint (10)
+  m_Name: Black Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22168,7 +22219,7 @@ Transform:
   m_GameObject: {fileID: 2031521525}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.83, y: -6.76, z: -4.92}
+  m_LocalPosition: {x: 11.18, y: -6.76, z: -4.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22186,6 +22237,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 103.55
+  mirrored: 1
 --- !u!1 &2032136031
 GameObject:
   m_ObjectHideFlags: 0
@@ -22400,17 +22454,15 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2145687872}
+  - {fileID: 1720972161}
   - {fileID: 1954341490}
   - {fileID: 295033528}
   - {fileID: 290191238}
-  - {fileID: 1982178265}
-  - {fileID: 179982555}
   - {fileID: 2019949521}
-  - {fileID: 1720972161}
   - {fileID: 2031521526}
-  - {fileID: 437166643}
-  - {fileID: 1406365683}
   - {fileID: 352083955}
+  - {fileID: 1406365683}
+  - {fileID: 437166643}
   - {fileID: 1234773563}
   - {fileID: 1732036993}
   - {fileID: 318715408}
@@ -22419,6 +22471,8 @@ Transform:
   - {fileID: 1117553162}
   - {fileID: 663525758}
   - {fileID: 2084660153}
+  - {fileID: 1982178265}
+  - {fileID: 179982555}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2059996532
@@ -23065,7 +23119,7 @@ GameObject:
   - component: {fileID: 2084660153}
   - component: {fileID: 2084660154}
   m_Layer: 0
-  m_Name: waypoint (9)
+  m_Name: Yellow Cover 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23080,7 +23134,7 @@ Transform:
   m_GameObject: {fileID: 2084660152}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.34, y: -6.76, z: 23.91}
+  m_LocalPosition: {x: -6.66, y: -6.76, z: 24.292}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23098,6 +23152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 81.03
+  mirrored: 0
 --- !u!1 &2096303495
 GameObject:
   m_ObjectHideFlags: 0
@@ -23818,7 +23875,7 @@ GameObject:
   - component: {fileID: 2145687872}
   - component: {fileID: 2145687873}
   m_Layer: 0
-  m_Name: waypoint
+  m_Name: Blue Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23833,7 +23890,7 @@ Transform:
   m_GameObject: {fileID: 2145687871}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.71, y: -6.31, z: 34.77}
+  m_LocalPosition: {x: -5.267, y: -6.31, z: 35.416}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23851,6 +23908,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3531593a815f61c468ee471b882265fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 81.03
+  mirrored: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
