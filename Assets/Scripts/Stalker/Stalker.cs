@@ -19,7 +19,7 @@ public class Stalker : MonoBehaviour
     public Transform playerSpotPoint;
 
     [Header("Cover Settings")]
-    public List<Transform> coversPositions;
+    public List<Cover> coversPositions; // TODO: rename to covers
     public int currentCoverIndex = 0;
     public bool showCovers;
     public float secondsInCover;
@@ -138,8 +138,8 @@ public class Stalker : MonoBehaviour
         {
             Gizmos.color = Color.cyan;
 
-            foreach (Transform coverPosition in coversPositions)
-                Gizmos.DrawWireSphere(coverPosition.position, 2);
+            foreach (Cover coverPosition in coversPositions)
+                Gizmos.DrawWireSphere(coverPosition.gameObject.transform.position, 2);
         }
 
         Vector3 eyePosition = eyes.position;

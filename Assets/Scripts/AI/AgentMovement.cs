@@ -11,6 +11,7 @@ public class AgentMovement : MonoBehaviour
     public List<Node> previousPath = null;
     private List<Vector3> nodesPositions = new List<Vector3>();
     public int currentNodeIndex = 0;
+    private bool isEnabled = true;
 
 
     public float speed = 2.0f;
@@ -37,7 +38,7 @@ public class AgentMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target == null)
+        if (target == null || !isEnabled)
             return;
 
         // Setting new base offset
@@ -153,4 +154,15 @@ public class AgentMovement : MonoBehaviour
 
     public void SetTarget(Transform target) { this.target = target; pathSolver.canFindPath = true; pathSolver.SetTarget(target); }
 
+    public void Enable()
+    {
+        isEnabled = true;
+    }
+
+    public void Disable()
+    {
+        isEnabled = false;
+    }
 }
+
+

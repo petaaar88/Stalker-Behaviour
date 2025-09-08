@@ -8,7 +8,7 @@ public class Recovering : State<Stalker>
     {
         stalker.canChasePlayer = false;
         stalker.currentStalkerState = "Recovering";
-        stalker.agentMovement.SetTarget(stalker.coversPositions[stalker.currentCoverIndex]);
+        stalker.agentMovement.SetTarget(stalker.coversPositions[stalker.currentCoverIndex].gameObject.transform);
         stalker.agentMovement.speed = stalker.relocatingSpeed;
         stalker.animator.SetTrigger("ChaseEnd");
 
@@ -17,7 +17,7 @@ public class Recovering : State<Stalker>
 
     public void Update(Stalker stalker)
     {
-        if (Vector3.Distance(stalker.coversPositions[stalker.currentCoverIndex].position, stalker.transform.position) <= stalker.agentMovement.stoppingDistance)
+        if (Vector3.Distance(stalker.coversPositions[stalker.currentCoverIndex].gameObject.transform.position, stalker.transform.position) <= stalker.agentMovement.stoppingDistance)
             stalker.stateMachine.ChangeState(stalker.stateMachine.inCoverState);
     }
 
