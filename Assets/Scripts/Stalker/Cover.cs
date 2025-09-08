@@ -6,6 +6,7 @@ public class Cover : MonoBehaviour
 {
     public Vector3 position;
     public float rotation = 0.0f;
+    public Collider coverCollider;
 
     public bool mirrored = false;
 
