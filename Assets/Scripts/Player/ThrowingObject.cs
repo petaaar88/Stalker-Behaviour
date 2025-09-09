@@ -7,6 +7,14 @@ using Invector.vCharacterController;
 
 public class ThrowingObject : MonoBehaviour
 {
+    private int numberOfProjectiles = 0;
+    [SerializeField]
+    private int maxNumberOfProjectiles = 3;
+    [SerializeField]
+    private bool hasInfiniteProjectiles = false;
+    [SerializeField]
+    private MeshRenderer bottleMesh;
+
     [SerializeField]
     private GameObject prefab = default;
     private bool isAiming;
@@ -23,6 +31,7 @@ public class ThrowingObject : MonoBehaviour
     public float minCameraAngle = -30f; // minimum camera X angle for min force
     public float maxCameraAngle = 30f;  // maximum camera X angle for max force
     public float maxForceMultiplier = 2f;
+
 
     [Serializable]
     public struct ForceData
@@ -68,6 +77,9 @@ public class ThrowingObject : MonoBehaviour
 
     void Start()
     {
+        if (!hasInfiniteProjectiles && numberOfProjectiles == 0)
+            bottleMesh.enabled = false;
+
         playerController = gameObject.transform.root.gameObject.GetComponent<vThirdPersonController>();
         playerState = gameObject.transform.root.gameObject.GetComponent<PlayerStates>();
         playerCamera = FindObjectOfType<vThirdPersonCamera>();
@@ -78,6 +90,9 @@ public class ThrowingObject : MonoBehaviour
 
     void Update()
     {
+
+        
+
         if (!isAiming)
         {
             foreach (Transform child in InstanceContainer)
@@ -102,12 +117,33 @@ public class ThrowingObject : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+
+        if (Input.GetKeyDown(KeyCode.Mouse1) && (numberOfProjectiles != 0 || hasInfiniteProjectiles))
         {
             timeline = PredictionSystem.Record.Prefabs.Add(prefab, Launch);
             playerController.isStrafing = true;
             isAiming = true;
             targetRightOffset = 0.78f;
+        }
+        else if(numberOfProjectiles == 0 && !hasInfiniteProjectiles)
+        {
+            prediction.Line.positionCount = 0;
+            playerController.isStrafing = false;
+
+            if (timeline != null)
+                PredictionSystem.Record.Prefabs.Remove(timeline);
+
+            isAiming = false;
+
+
+            foreach (Transform child in InstanceContainer)
+            {
+                if (child.GetComponent<ThrowableObject>().isCollided)
+                    Destroy(child.gameObject);
+            }
+
+            TrajectoryPredictionDrawer.HideAll();
+            targetRightOffset = 0.2f;
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse1))
@@ -130,7 +166,6 @@ public class ThrowingObject : MonoBehaviour
             TrajectoryPredictionDrawer.HideAll();
             targetRightOffset = 0.2f;
         }
-
         Shoot();
 
         playerCamera.rightOffset = Mathf.Lerp(playerCamera.rightOffset, targetRightOffset, Time.deltaTime * interpolationSpeed);
@@ -138,12 +173,29 @@ public class ThrowingObject : MonoBehaviour
 
     void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && isAiming)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && isAiming && (numberOfProjectiles != 0 || hasInfiniteProjectiles))
         {
             var instance = Instantiate(prefab);
             instance.transform.SetParent(InstanceContainer);
             Launch(instance);
+            numberOfProjectiles--;
+
+            if (numberOfProjectiles == 0 && !hasInfiniteProjectiles)
+                bottleMesh.enabled = false;
         }
+    }
+
+    public bool AddProjectile()
+    {
+        if (numberOfProjectiles == maxNumberOfProjectiles)
+            return false;
+
+        if(numberOfProjectiles == 0)
+            bottleMesh.enabled = true;
+
+        numberOfProjectiles++;
+
+        return true;
     }
 
     float GetForceMultiplierFromCameraRotation()

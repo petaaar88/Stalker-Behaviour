@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Weapon
   - Ground
+  - Pickup Bottle
   layers:
   - Default
   - TransparentFX
