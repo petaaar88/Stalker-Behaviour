@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Stalker : MonoBehaviour
@@ -15,6 +14,7 @@ public class Stalker : MonoBehaviour
     [HideInInspector]
     public Transform player;
     public Transform eyes;
+    public Transform neck;
     public GameObject playerGameObject;
     public Transform playerSpotPoint;
 
@@ -66,6 +66,22 @@ public class Stalker : MonoBehaviour
 
     void Start()
     {
+        // Find neck transform for eyea sync rotation
+        if (transform != null)
+        {
+            
+            Transform[] children = transform.GetComponentsInChildren<Transform>();
+
+            foreach (Transform child in children)
+            {
+                if (child.name == "Character1_Neck") 
+                {
+                    neck = child;
+                    break;
+                }
+            }
+        }
+
         health = GetComponent<Health>();
         animator = GetComponent<Animator>();
         agentMovement = GetComponent<AgentMovement>();
@@ -88,6 +104,7 @@ public class Stalker : MonoBehaviour
 
     void Update()
     {
+        SyncEyesRotationWithHead();
         stateMachine.Update();
     }
 
@@ -176,6 +193,16 @@ public class Stalker : MonoBehaviour
         Gizmos.DrawLine(eyePosition, eyePosition + rightDirection * viewDistance);
         Gizmos.DrawLine(eyePosition, eyePosition + leftDirection * viewDistance);
 
+    }
+
+    private void SyncEyesRotationWithHead()
+    {
+        if (neck != null && eyes != null)
+        {
+            Vector3 eyesEuler = eyes.eulerAngles;
+            eyesEuler.y = neck.eulerAngles.y;
+            eyes.eulerAngles = eyesEuler;
+        }
     }
 
     // For animtion triggers
