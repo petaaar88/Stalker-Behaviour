@@ -29,6 +29,9 @@ public class AlertInvestigating : State<Stalker>
 
     public void Update(Stalker stalker)
     {
+        if (MessageBroker.Instance.IsEngagement() && Vector3.Distance(stalker.transform.position, stalker.player.position) < stalker.startToChaseDistanceWhenEngaged)
+            stalker.StartEngageToPlayer();
+
         if (Vector3.Distance(stalker.agentMovement.pathSolver.grid.NodeFromWorldPoint(stalker.investigationNoise.position).worldPosition, stalker.transform.position) <= stalker.agentMovement.stoppingDistance)
         {
             stalker.previousLoudSubtlePosition = NoiceListener.Instance.subtleNoicePosition;

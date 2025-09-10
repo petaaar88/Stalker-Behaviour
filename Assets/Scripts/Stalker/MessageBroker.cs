@@ -98,4 +98,9 @@ public class MessageBroker : MonoBehaviour
     {
 
     }
+
+    public bool IsEngagement()
+    {
+        return isTimerStarted;
+    }
 }

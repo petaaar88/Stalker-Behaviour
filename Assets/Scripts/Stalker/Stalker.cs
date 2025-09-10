@@ -38,6 +38,7 @@ public class Stalker : MonoBehaviour
     public bool canChasePlayer = true;
     public float chaseDelay = 1.0f;
     public float chaseSpeed = 5.35f;
+    public float startToChaseDistanceWhenEngaged = 15.0f;
 
     [Header("Noice Detection")]
     public float loudNoiceDetectionRange;

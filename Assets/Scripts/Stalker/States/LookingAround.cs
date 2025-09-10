@@ -19,7 +19,8 @@ public class LookingAround : State<Stalker>
     }
     public void Update(Stalker stalker)
     {
-      
+        if (MessageBroker.Instance.IsEngagement() && Vector3.Distance(stalker.transform.position, stalker.player.position) < stalker.startToChaseDistanceWhenEngaged)
+            stalker.StartEngageToPlayer();
     }
     public void Exit(Stalker stalker)
     {

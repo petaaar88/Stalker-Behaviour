@@ -26,6 +26,9 @@ public class Investigating : State<Stalker>
 
     public void Update(Stalker stalker)
     {
+        if (MessageBroker.Instance.IsEngagement() && Vector3.Distance(stalker.transform.position, stalker.player.position) < stalker.startToChaseDistanceWhenEngaged)
+            stalker.StartEngageToPlayer();
+
         if (Vector3.Distance(stalker.investigationNoise.position, stalker.transform.position) <= stalker.agentMovement.stoppingDistance)
         {
             isArrivedAtNoiseOriginPosition = true;
