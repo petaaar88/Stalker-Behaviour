@@ -59,6 +59,14 @@ public class Stalker : MonoBehaviour
     [Header("Attacking")]
     public bool canAttack = false;
 
+    [HideInInspector]
+    public Collider leftHandCollider;
+    [HideInInspector]
+    public Collider rightHandCollider;
+    [HideInInspector]
+    public bool isRightHandedAttack;
+
+
     //Engage To Player State
     public bool isEngagingToPlayer;
 
@@ -81,6 +89,13 @@ public class Stalker : MonoBehaviour
                 }
             }
         }
+
+        leftHandCollider = FindDeepChild(gameObject.transform, "Character1_LeftHand").gameObject.GetComponent<Collider>();
+        leftHandCollider.enabled = false;
+
+        rightHandCollider = FindDeepChild(gameObject.transform, "Character1_RightHand").gameObject.GetComponent<Collider>();
+        rightHandCollider.enabled = false;
+
 
         health = GetComponent<Health>();
         animator = GetComponent<Animator>();
@@ -221,9 +236,41 @@ public class Stalker : MonoBehaviour
             stateMachine.ChangeState(stateMachine.waitingToAttackState);
     }
 
+    public void StartAttackInAnimation()
+    {
+        if (!isRightHandedAttack)
+            rightHandCollider.enabled = true;
+        else
+            leftHandCollider.enabled = true;
+    }
+
+    public void EndAttackInAnimation()
+    {
+        if (!isRightHandedAttack)
+            rightHandCollider.enabled = false;
+        else
+            leftHandCollider.enabled = false;
+    }
+
+    Transform FindDeepChild(Transform parent, string name)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.name == name)
+                return child;
+
+            Transform result = FindDeepChild(child, name);
+            if (result != null)
+                return result;
+        }
+        return null;
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Weapon"))
             health.TakeDamage(10);
+
     }
 }

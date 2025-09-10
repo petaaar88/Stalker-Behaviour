@@ -198,6 +198,16 @@ public class ThrowingObject : MonoBehaviour
         return true;
     }
 
+    public int GetNumberOfProjectiles()
+    {
+        return numberOfProjectiles;
+    }
+
+    public bool HasInfiniteProjectiles()
+    {
+        return hasInfiniteProjectiles;
+    }
+
     float GetForceMultiplierFromCameraRotation()
     {
         // Uzmi X rotaciju kamere

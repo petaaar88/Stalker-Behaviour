@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Attacking : State<Stalker>
 {
+
     public void Enter(Stalker stalker)
     {
         stalker.animator.SetTrigger("Attack");
-        stalker.animator.SetBool("isAttackMirrored", Random.Range(0, 2) == 0);
+        stalker.isRightHandedAttack = Random.Range(0, 2) == 1;
+        stalker.animator.SetBool("isAttackMirrored", stalker.isRightHandedAttack);
+
         stalker.currentStalkerState = "Attacking";
     }
 
@@ -22,5 +25,9 @@ public class Attacking : State<Stalker>
         stalker.canAttack = false;
         MessageBroker.Instance.canChooseStalkerForAttacking = true;
 
+        if (!stalker.isRightHandedAttack)
+            stalker.rightHandCollider.enabled = false;
+        else
+            stalker.leftHandCollider.enabled = false;
     }
 }

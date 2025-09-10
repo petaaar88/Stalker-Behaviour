@@ -135,6 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1032817408626053939}
+  - component: {fileID: 1550674424170442151}
   m_Layer: 0
   m_Name: Character1_LeftHand
   m_TagString: Untagged
@@ -161,6 +162,27 @@ Transform:
   - {fileID: 6975694028189580292}
   m_Father: {fileID: 7319933907191899187}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1550674424170442151
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84990096075436372}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4758457, y: 0.5205427, z: 0.4969374}
+  m_Center: {x: -0.02581056, y: -0.10599899, z: -0.008058377}
 --- !u!1 &173608754118667824
 GameObject:
   m_ObjectHideFlags: 0
@@ -3662,6 +3684,7 @@ MonoBehaviour:
   previousStalkerState: 
   player: {fileID: 0}
   eyes: {fileID: 4878740155474424158}
+  neck: {fileID: 0}
   playerGameObject: {fileID: 0}
   playerSpotPoint: {fileID: 0}
   coversPositions:
@@ -3688,7 +3711,11 @@ MonoBehaviour:
   previousLoudSubtlePosition: {x: 0, y: 0, z: 0}
   investigatingSpeed: 2.72
   noice: {fileID: 0}
+  investigationNoise: {fileID: 0}
   canAttack: 0
+  leftHandCollider: {fileID: 0}
+  rightHandCollider: {fileID: 0}
+  isRightHandedAttack: 0
   isEngagingToPlayer: 0
   health: {fileID: 0}
 --- !u!114 &1679114835901622007
@@ -3703,10 +3730,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2ad67a2e631f1499978c2d83140e91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathSolver: {fileID: 0}
+  target: {fileID: 0}
+  currentNodeIndex: 0
   speed: 5.35
   baseOffset: -0.14
   stoppingDistance: 2.2
   rotationSpeed: 4
+  isUsingAStarDebug: 0
 --- !u!114 &4623606634266088221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3979,7 +4010,7 @@ GameObject:
   - component: {fileID: 9006683932971705070}
   m_Layer: 0
   m_Name: Character1_Ctrl_RightHand
-  m_TagString: Untagged
+  m_TagString: StalkerAttackRight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5329,7 +5360,7 @@ GameObject:
   - component: {fileID: 1486770640215984067}
   m_Layer: 0
   m_Name: Character1_Ctrl_LeftHand
-  m_TagString: Untagged
+  m_TagString: StalkerAttackLeft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5493,6 +5524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2704346820385178081}
+  - component: {fileID: 8207806313781238757}
   m_Layer: 0
   m_Name: Character1_RightHand
   m_TagString: Untagged
@@ -5519,6 +5551,27 @@ Transform:
   - {fileID: 3560704512530958357}
   m_Father: {fileID: 5659853952038704359}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8207806313781238757
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9075033311975659063}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5291709, y: 0.40831128, z: 0.44262677}
+  m_Center: {x: -0.027972449, y: -0.0010421115, z: 0.044513937}
 --- !u!1 &9143596090277534125
 GameObject:
   m_ObjectHideFlags: 0
