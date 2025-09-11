@@ -272,7 +272,7 @@ public class Stalker : MonoBehaviour
     {
         if (other.CompareTag("Weapon"))
         {
-            if(!this.isEngagingToPlayer)
+            if(!this.isEngagingToPlayer && stateMachine.GetCurrentState() != stateMachine.recoveringState)
                 this.StartEngageToPlayer();
 
             health.TakeDamage(10);
