@@ -20,7 +20,6 @@ public class InCover : State<Stalker>
     {
         coverWallCollider = stalker.coversPositions[stalker.currentCoverIndex].coverCollider;
 
-
         if (stalker.gameObject.GetComponent<CapsuleCollider>() != null && coverWallCollider != null)
         {
             Physics.IgnoreCollision(stalker.gameObject.GetComponent<CapsuleCollider>(), coverWallCollider, true);

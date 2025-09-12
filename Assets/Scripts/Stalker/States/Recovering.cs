@@ -13,6 +13,7 @@ public class Recovering : State<Stalker>
         stalker.animator.SetTrigger("ChaseEnd");
 
         stalker.animator.applyRootMotion = false;
+        stalker.audioManager.PlaySound("RunningToCover");
     }
 
     public void Update(Stalker stalker)
@@ -29,5 +30,6 @@ public class Recovering : State<Stalker>
         stalker.previousStalkerState = "Recovering";
         stalker.previousLoudSubtlePosition = NoiceListener.Instance.subtleNoicePosition;
         stalker.previousLoudNoicePosition = NoiceListener.Instance.loudNoicePosition;
+        stalker.audioManager.StopSound("RunningToCover");
     }
 }

@@ -25,6 +25,7 @@ public class AlertInvestigating : State<Stalker>
 
         stalker.investigationNoise.position = NoiseBroker.Instance.GetLandingPosition(stalker.noice.position, stalker);
         stalker.agentMovement.SetTarget(stalker.investigationNoise);
+        stalker.audioManager.PlaySound("RunningToCover");
     }
 
     public void Update(Stalker stalker)
@@ -49,6 +50,8 @@ public class AlertInvestigating : State<Stalker>
 
         if (!isArrivedAtNoiseOriginPosition)
             NoiseBroker.Instance.RemoveStalkerFromInspectingNoiseOrigin(noiseOriginPosition, stalker);
+
+        stalker.audioManager.StopSound("RunningToCover");
 
     }
 }

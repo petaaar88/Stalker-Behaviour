@@ -13,6 +13,7 @@ public class Relocating : State<Stalker>
         stalker.currentStalkerState = "Relocating";
         stalker.animator.applyRootMotion = false;
 
+        stalker.audioManager.PlaySound("RunningToCover");
     }
 
     public void Update(Stalker stalker)
@@ -34,5 +35,7 @@ public class Relocating : State<Stalker>
         stalker.previousStalkerState = "Relocating";
         stalker.previousLoudSubtlePosition = NoiceListener.Instance.subtleNoicePosition;
         stalker.previousLoudNoicePosition = NoiceListener.Instance.loudNoicePosition;
+
+        stalker.audioManager.StopSound("RunningToCover");
     }
 }
