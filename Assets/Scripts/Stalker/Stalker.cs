@@ -73,8 +73,13 @@ public class Stalker : MonoBehaviour
 
     public Health health;
 
+
+    [HideInInspector]
+    public ObjectAudioManager audioManager;
+
     void Start()
     {
+        audioManager = GetComponent<ObjectAudioManager>(); 
         // Find neck transform for eyea sync rotation
         if (transform != null)
         {
@@ -115,6 +120,8 @@ public class Stalker : MonoBehaviour
         stateMachine.relocatingState.Enter(this);
 
         stateMachine.SetGlobalState(stateMachine.globalState);
+
+
     }
 
 
