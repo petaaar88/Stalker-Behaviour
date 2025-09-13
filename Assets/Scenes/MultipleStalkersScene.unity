@@ -738,7 +738,7 @@ MonoBehaviour:
   - soundName: Pickup
     audioClip: {fileID: 8300000, guid: 9141b634c698f0e48ad600543c562b58, type: 3}
     soundType: 1
-    individualVolume: 0.819
+    individualVolume: 1
     pitch: 1
     loop: 0
     is3D: 1

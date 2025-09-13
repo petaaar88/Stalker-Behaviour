@@ -23,7 +23,8 @@ public class GlobalStalkerState : State<Stalker>
             isDead = true;
             return;
         }
-
+        if (isDead)
+            return;
         // Delaying chasing
         if (sawPlayer)
         {

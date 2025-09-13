@@ -3704,6 +3704,7 @@ MonoBehaviour:
   canChasePlayer: 1
   chaseDelay: 0.87
   chaseSpeed: 4.01
+  startToChaseDistanceWhenEngaged: 15
   loudNoiceDetectionRange: 17
   subtleNoiceDetecitonRange: 12.37
   showNoiceDetectionRange: 1
@@ -3718,6 +3719,7 @@ MonoBehaviour:
   isRightHandedAttack: 0
   isEngagingToPlayer: 0
   health: {fileID: 0}
+  audioManager: {fileID: 0}
 --- !u!114 &1679114835901622007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3737,6 +3739,8 @@ MonoBehaviour:
   baseOffset: -0.14
   stoppingDistance: 2.2
   rotationSpeed: 4
+  useCollisionAvoidance: 1
+  avoidanceBlendFactor: 0.7
   isUsingAStarDebug: 0
 --- !u!114 &4623606634266088221
 MonoBehaviour:

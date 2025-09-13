@@ -295,8 +295,11 @@ public class Stalker : MonoBehaviour
         {
             if(!this.isEngagingToPlayer && stateMachine.GetCurrentState() != stateMachine.recoveringState)
                 this.StartEngageToPlayer();
-
+            
             health.TakeDamage(10);
+
+            if (!health.IsDead)
+                audioManager.PlaySound("Hurt");
         }
 
     }
