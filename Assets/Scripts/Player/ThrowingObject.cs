@@ -91,16 +91,7 @@ public class ThrowingObject : MonoBehaviour
     void Update()
     {
 
-        
-
-        if (!isAiming)
-        {
-            foreach (Transform child in InstanceContainer)
-            {
-                if (child.GetComponent<ThrowableObject>().isCollided)
-                    Destroy(child.gameObject);
-            }
-        }
+    
 
         if (playerState.currentState == PlayerStates.States.SPRINTING || playerState.currentState == PlayerStates.States.WALKING)
         {
