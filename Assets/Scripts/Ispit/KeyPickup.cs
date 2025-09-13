@@ -9,11 +9,15 @@ public class KeyPickup : MonoBehaviour
     private bool isPlayerNearby = false;
     private ObjectAudioManager audioManager;
     private Renderer[] renderers;
+    private Animator playerAnimator;
+
 
     void Start()
     {
         audioManager = GetComponent<ObjectAudioManager>();
         renderers = GetComponentsInChildren<Renderer>();
+        playerAnimator = GameObject.FindWithTag("Player").GetComponent<Animator>();
+
     }
 
     void Update()
@@ -40,6 +44,7 @@ public class KeyPickup : MonoBehaviour
     private void CollectKey()
     {
         Debug.Log("Key collected!");
+        playerAnimator.SetTrigger("IsPickup");
 
         if (GameManager.Instance != null)
             GameManager.Instance.SetKeyCollected(true);

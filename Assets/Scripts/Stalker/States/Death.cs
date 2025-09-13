@@ -12,7 +12,7 @@ public class Death : State<Stalker>
         stalker.animator.SetTrigger("IsDead");
         MessageBroker.Instance.stalkersWaitingForAttack.Remove(stalker);
         MessageBroker.Instance.engagedStalkers.Remove(stalker);
-
+        stalker.audioManager.StopAllSounds();
         stalker.audioManager.PlaySound("Death");
     }
 

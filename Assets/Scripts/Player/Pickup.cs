@@ -7,12 +7,15 @@ public class Pickup : MonoBehaviour
     private ObjectAudioManager audioManager;
     private bool isInRange = false;
     private Renderer[] childRenderers;
+    private Animator playerAnimator;
 
     void Start()
     {
         audioManager = GetComponent<ObjectAudioManager>();
         throwingObject = FindObjectOfType<ThrowingObject>();
         childRenderers = GetComponentsInChildren<Renderer>(); 
+
+        playerAnimator = GameObject.FindWithTag("Player").GetComponent<Animator>();
     }
 
     void Update()
@@ -21,6 +24,7 @@ public class Pickup : MonoBehaviour
         {
             if (throwingObject.AddProjectile())
             {
+                playerAnimator.SetTrigger("IsPickup");
                 foreach (var rend in childRenderers)
                     rend.enabled = false;
 
