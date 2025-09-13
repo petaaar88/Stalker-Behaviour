@@ -16,9 +16,13 @@ public class LookingAround : State<Stalker>
         stalker.agentMovement.speed = 0.0f;
         noisePosition = stalker.noice.position;
         stalker.animator.SetFloat("LookAroundAnimationIndex",(float) NoiseBroker.Instance.GetLookAroundAnimationIndex(stalker.noice.position, stalker));
+        stalker.ChooseRandomSfx(new string[] { "Clicking", "Roaring", "Laughing", "Growl" });
+
     }
     public void Update(Stalker stalker)
     {
+
+
         if (MessageBroker.Instance.IsEngagement() && Vector3.Distance(stalker.transform.position, stalker.player.position) < stalker.startToChaseDistanceWhenEngaged)
             stalker.StartEngageToPlayer();
     }
@@ -29,6 +33,8 @@ public class LookingAround : State<Stalker>
         stalker.agentMovement.speed = speedBeforeEnteringLookAroundState;
 
         NoiseBroker.Instance.RemoveStalkerFromInspectingNoiseOrigin(noisePosition, stalker);
+
+        stalker.audioManager.StopAllSounds();
     }
 
 

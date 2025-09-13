@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Death : State<Stalker>
@@ -11,6 +12,8 @@ public class Death : State<Stalker>
         stalker.animator.SetTrigger("IsDead");
         MessageBroker.Instance.stalkersWaitingForAttack.Remove(stalker);
         MessageBroker.Instance.engagedStalkers.Remove(stalker);
+
+        stalker.audioManager.PlaySound("Death");
     }
 
     public void Update(Stalker stalker)
@@ -20,6 +23,6 @@ public class Death : State<Stalker>
 
     public void Exit(Stalker stalker)
     {
-
+      
     }
 }

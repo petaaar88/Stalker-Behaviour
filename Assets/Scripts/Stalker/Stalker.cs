@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+
 
 public class Stalker : MonoBehaviour
 {
@@ -272,6 +274,18 @@ public class Stalker : MonoBehaviour
                 return result;
         }
         return null;
+    }
+
+    public string ChooseRandomSfx(string[] soundNames)
+    {
+        if (soundNames == null || soundNames.Length == 0)
+            return "";
+
+        int randomIndex = Random.Range(0, soundNames.Length);
+        audioManager.PlaySound(soundNames[randomIndex]);
+
+
+        return soundNames[randomIndex];
     }
 
 

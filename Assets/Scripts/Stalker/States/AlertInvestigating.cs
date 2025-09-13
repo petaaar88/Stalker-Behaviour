@@ -7,6 +7,7 @@ public class AlertInvestigating : State<Stalker>
 {
     private bool isArrivedAtNoiseOriginPosition = false; // TODO: rename
     private Vector3 noiseOriginPosition;
+    private string sfxName;
 
     public void Enter(Stalker stalker)
     {
@@ -26,6 +27,7 @@ public class AlertInvestigating : State<Stalker>
         stalker.investigationNoise.position = NoiseBroker.Instance.GetLandingPosition(stalker.noice.position, stalker);
         stalker.agentMovement.SetTarget(stalker.investigationNoise);
         stalker.audioManager.PlaySound("RunningToCover");
+        sfxName = stalker.ChooseRandomSfx(new string[] {  "Growl","Growl2" });
     }
 
     public void Update(Stalker stalker)
@@ -53,5 +55,7 @@ public class AlertInvestigating : State<Stalker>
 
         stalker.audioManager.StopSound("RunningToCover");
 
+        if (stalker.audioManager.IsSoundPlaying(sfxName))
+            stalker.audioManager.StopSound(sfxName);
     }
 }

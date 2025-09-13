@@ -12,6 +12,8 @@ public class Attacking : State<Stalker>
         stalker.animator.SetBool("isAttackMirrored", stalker.isRightHandedAttack);
 
         stalker.currentStalkerState = "Attacking";
+
+        stalker.audioManager.PlaySound("Attack");
     }
 
     public void Update(Stalker stalker)
@@ -29,5 +31,7 @@ public class Attacking : State<Stalker>
             stalker.rightHandCollider.enabled = false;
         else
             stalker.leftHandCollider.enabled = false;
+
+        stalker.audioManager.StopSound("Attack");
     }
 }

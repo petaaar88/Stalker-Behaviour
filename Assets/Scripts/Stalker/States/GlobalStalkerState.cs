@@ -8,6 +8,7 @@ public class GlobalStalkerState : State<Stalker>
 {
     private float chaseDelayTimer = 0f;
     private bool sawPlayer = false;
+    private bool isDead = false;
 
     public void Enter(Stalker stalker)
     {
@@ -16,9 +17,10 @@ public class GlobalStalkerState : State<Stalker>
 
     public void Update(Stalker stalker)
     {
-        if (stalker.health.IsDead)
+        if (stalker.health.IsDead && !isDead)
         {
             stalker.stateMachine.ChangeState(stalker.stateMachine.deathState);
+            isDead = true;
             return;
         }
 
