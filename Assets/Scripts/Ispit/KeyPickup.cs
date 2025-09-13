@@ -1,13 +1,20 @@
+using System.Collections;
 using UnityEngine;
 
 public class KeyPickup : MonoBehaviour
 {
-    [SerializeField]
-    private string playerTag = "Player";
-    [SerializeField]
-    private KeyCode interactionKey = KeyCode.E;
+    [SerializeField] private string playerTag = "Player";
+    [SerializeField] private KeyCode interactionKey = KeyCode.E;
 
     private bool isPlayerNearby = false;
+    private ObjectAudioManager audioManager;
+    private Renderer[] renderers;
+
+    void Start()
+    {
+        audioManager = GetComponent<ObjectAudioManager>();
+        renderers = GetComponentsInChildren<Renderer>();
+    }
 
     void Update()
     {
@@ -38,6 +45,19 @@ public class KeyPickup : MonoBehaviour
             GameManager.Instance.SetKeyCollected(true);
         else
             Debug.LogError("GameManager instance not found!");
+
+        foreach (var rend in renderers)
+            rend.enabled = false;
+
+        audioManager.PlaySound("Pickup");
+
+        StartCoroutine(DestroyAfterSound("Pickup"));
+    }
+
+    private IEnumerator DestroyAfterSound(string soundName)
+    {
+        while (audioManager.IsSoundPlaying(soundName))
+            yield return null;
 
         Destroy(gameObject);
     }

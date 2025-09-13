@@ -1,13 +1,18 @@
+﻿using System.Collections;
 using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
     private ThrowingObject throwingObject;
+    private ObjectAudioManager audioManager;
     private bool isInRange = false;
+    private Renderer[] childRenderers;
 
     void Start()
     {
+        audioManager = GetComponent<ObjectAudioManager>();
         throwingObject = FindObjectOfType<ThrowingObject>();
+        childRenderers = GetComponentsInChildren<Renderer>(); 
     }
 
     void Update()
@@ -15,7 +20,14 @@ public class Pickup : MonoBehaviour
         if (isInRange && Input.GetKeyDown(KeyCode.E))
         {
             if (throwingObject.AddProjectile())
-                Destroy(this.gameObject);
+            {
+                foreach (var rend in childRenderers)
+                    rend.enabled = false;
+
+                audioManager.PlaySound("Pickup");
+
+                StartCoroutine(DestroyAfterSound("Pickup"));
+            }
         }
     }
 
@@ -29,5 +41,13 @@ public class Pickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
             isInRange = false;
+    }
+
+    private IEnumerator DestroyAfterSound(string soundName)
+    {
+        while (audioManager.IsSoundPlaying(soundName))
+            yield return null;
+
+        Destroy(gameObject);
     }
 }
