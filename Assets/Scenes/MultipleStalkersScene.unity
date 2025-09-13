@@ -27966,6 +27966,10 @@ PrefabInstance:
       propertyPath: weapon
       value: 
       objectReference: {fileID: 139299860}
+    - target: {fileID: 4290222081670793738, guid: 860e60de9587df3498805c67c1457142, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a766aa00b1dac04fa6c6bedc6003b1c, type: 2}
     - target: {fileID: 4391120450057776966, guid: 860e60de9587df3498805c67c1457142, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -27978,6 +27982,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6624009275342135123, guid: 860e60de9587df3498805c67c1457142, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a766aa00b1dac04fa6c6bedc6003b1c, type: 2}
     - target: {fileID: 7568918736820773781, guid: 860e60de9587df3498805c67c1457142, type: 3}
       propertyPath: weapon
       value: 
